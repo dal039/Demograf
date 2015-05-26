@@ -14,7 +14,7 @@ var app = express();
 dotenv.load();
 
 //connect to database
-var conString = process.env.DATABASE_CONNECTION_URL;
+var conString = process.env.DELPHI_CONNECTION_URL;
 
 //Configures the Template engine
 app.engine('handlebars', handlebars({defaultLayout: 'layout'}));
