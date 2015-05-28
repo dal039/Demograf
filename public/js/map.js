@@ -1,4 +1,5 @@
-var map = new L.Map("map", {center: [37.8, -96.9], zoom: 4})
+var map = new L.Map("map", {center: [37.8, -96.9], zoom: 4, zoomControl: false })
+.setView([32.747, -117.181], 10)
     .addLayer(new L.TileLayer("http://{s}.tiles.mapbox.com/v3/examples.map-vyofok3q/{z}/{x}/{y}.png"));
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
