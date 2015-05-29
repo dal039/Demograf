@@ -17,40 +17,48 @@ dotenv.load();
 var conString = process.env.DELPHI_CONNECTION_URL;
 
 //Configures the Template engine
-app.engine('handlebars', handlebars({defaultLayout: 'layout'}));
+app.engine('handlebars', handlebars({
+    defaultLayout: 'layout'
+}));
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({ secret: 'keyboard cat',
-                  saveUninitialized: true,
-                  resave: true}));
+app.use(session({
+    secret: 'keyboard cat',
+    saveUninitialized: true,
+    resave: true
+}));
 
 //set environment ports and start application
 app.set('port', process.env.PORT || 3000);
 
 //routes
-app.get('/', function(req, res){
-  res.render('index');
+app.get('/', function(req, res) {
+    res.render('index');
 });
 
-app.get('/delphidata', function (req, res) {
+app.get('/delphidata', function(req, res) {
     // initialize connection pool 
     pg.connect(conString, function(err, client, done) {
-      if(err) return console.log(err);
-      
-      var query = 'SELECT * FROM cdph_smoking_prevalence_in_adults_1984_2013';
-      client.query(query, function(err, result) {
-        // return the client to the connection pool for other requests to reuse
-        done();
+        if (err) return console.log(err);
 
-        res.writeHead("200", {'content-type': 'application/json'});
-        res.end(JSON.stringify(result.rows));
-      });
+        var query = 'SELECT * FROM cdph_smoking_prevalence_in_adults_1984_2013';
+        client.query(query, function(err, result) {
+            // return the client to the connection pool for other requests to reuse
+            done();
+
+            res.writeHead("200", {
+                'content-type': 'application/json'
+            });
+            res.end(JSON.stringify(result.rows));
+        });
     });
-  });
+});
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
