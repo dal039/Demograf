@@ -7,8 +7,13 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var dotenv = require('dotenv');
-var pg = require('pg');
+
 var app = express();
+var router = express.Router();
+
+// declare routes
+var index = require('./routes/index');
+var delphi = require('./routes/delphi');
 
 //client id and client secret here, taken from .env
 dotenv.load();
@@ -37,28 +42,21 @@ app.use(session({
 //set environment ports and start application
 app.set('port', process.env.PORT || 3000);
 
+// middleware function that occurs every time a request is made
+router.use(function(req, res, next) {
+
+    // log each request to the console
+    console.log(req.method, req.url);
+
+    // continue doing what we were doing and go to the route
+    next();
+});
+
 //routes
-app.get('/', function(req, res) {
-    res.render('index');
-});
+router.get('/', index.view);
+router.get('/delphidata', delphi.getSmokingData);
 
-app.get('/delphidata', function(req, res) {
-    // initialize connection pool 
-    pg.connect(conString, function(err, client, done) {
-        if (err) return console.log(err);
-
-        var query = 'SELECT * FROM cdph_smoking_prevalence_in_adults_1984_2013';
-        client.query(query, function(err, result) {
-            // return the client to the connection pool for other requests to reuse
-            done();
-
-            res.writeHead("200", {
-                'content-type': 'application/json'
-            });
-            res.end(JSON.stringify(result.rows));
-        });
-    });
-});
+app.use('/', router);
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
