@@ -1,3 +1,7 @@
+body {
+    padding-top: 50px;
+}
+
 .navbar-brand {
     position: absolute;
     width: 100%;
@@ -7,11 +11,6 @@
     margin: auto;
 }
 
-body {
-    padding-top: 70px;
-}
-
 #map {
-    width: 700px;
-    height: 700px;
+    min-height: 100vh;
 }
