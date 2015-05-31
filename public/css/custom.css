@@ -14,3 +14,25 @@ body {
 #map {
     min-height: 100vh;
 }
+
+path {
+    stroke-width: 1.5px;
+    stroke: white;
+    fill: #990033;
+    cursor: pointer;
+}
+
+path:hover,
+path.highlighted {
+    fill: #3399ff;
+}
+
+div.tooltip {
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    padding: 4px 8px;
+    display: none;
+}
