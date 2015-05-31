@@ -56,6 +56,9 @@ router.use(function(req, res, next) {
 router.get('/', index.view);
 router.get('/delphidata', delphi.getSmokingData);
 
+var occupational_data = require('./data/delphi_occupational_industry.json');
+//console.log(occupational_data.meta.view.columns[13]);
+
 app.use('/', router);
 
 http.createServer(app).listen(app.get('port'), function() {
