@@ -1,7 +1,7 @@
 var map = new Datamap({
     element: document.getElementById('map'),
     geographyConfig: {
-        dataUrl: 'data/data.topo.json'
+        dataUrl: 'data/regions.topo.json'
     },
     scope: 'regions',
     responsive: true,
@@ -11,7 +11,7 @@ var map = new Datamap({
     setProjection: function(element) {
         var projection = d3.geo.mercator()
             .center([-117.1625, 32.7150])
-            .scale(40000)
+            .scale(20000)
             .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
         var path = d3.geo.path().projection(projection);
         return {
