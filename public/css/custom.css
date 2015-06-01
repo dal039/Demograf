@@ -53,7 +53,10 @@ div.tooltip {
 }
 
 .btn-link {
- 
-  font-size: large;
-  color: rgb(68, 68, 68);
+    font-size: large;
+    color: rgb(68, 68, 68);
+}
+
+#start {
+    padding-top: 200px;
 }
