@@ -25,7 +25,7 @@ path {
 
 path:hover,
 path.highlighted {
-    fill: #3399ff !important; 
+    fill: #3399ff !important;
 }
 
 div.tooltip {
@@ -36,4 +36,15 @@ div.tooltip {
     font-weight: bold !important;
     padding: 4px 8px !important;
     display: none !important;
+}
+
+@media screen and (min-width: 768px){
+.jumbotron {
+  height: 100vh;
+}
+}
+
+.jumbotron {
+
+  height: 100vh;
 }
