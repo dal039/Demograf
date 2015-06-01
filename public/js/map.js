@@ -106,16 +106,17 @@ function hideTooltip() {
 /////////////////////sliders/////////////////////
 $(function() {
     $("#range").ionRangeSlider({
-        hide_min_max: true,
-        keyboard: true,
+        type: "double",
         min: 0,
-        max: 5000,
-        from: 1000,
-        to: 4000,
-        type: 'double',
-        step: 1,
+        max: 1000,
+        to: 1000,
+        from: 0,
+        step: 100,
+        prettify_enabled: true,
         prefix: "$",
-        grid: true
+        grid: true,
+        grid_snap: true,
+        force_edges: true
     });
 
 });
