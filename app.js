@@ -54,10 +54,8 @@ router.use(function(req, res, next) {
 
 //routes
 router.get('/', index.view);
-router.get('/delphidata', delphi.getSmokingData);
-
-var occupational_data = require('./data/delphi_occupational_industry.json');
-console.log(occupational_data.meta.view.columns[13]);
+router.get('/delphi_home_value_data', delphi.getHomeValueData);
+router.get('/delphi_housing_cost_data', delphi.getHousingCostData);
 
 app.use('/', router);
 

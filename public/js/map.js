@@ -26,7 +26,7 @@ $(window).on('resize', function() {
 });
 
 /////////////////////////////D3.js VERSION////////////////////////////
-
+/*
 
 //Map dimensions (in pixels)
 var width = 800,
@@ -102,6 +102,7 @@ function hideTooltip() {
     tooltip.style("display", "none");
 }
 
+*/
 /////////////////////sliders/////////////////////
 $(function() {
     $("#range").ionRangeSlider({
