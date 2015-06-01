@@ -101,3 +101,7 @@ function moveTooltip() {
 function hideTooltip() {
     tooltip.style("display", "none");
 }
+
+
+
+d3.select('#slider').call(d3.slider().axis(true).min(1).max(14).step(1));
