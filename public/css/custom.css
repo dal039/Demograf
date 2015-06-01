@@ -1,6 +1,4 @@
-body {
-    padding-top: 50px;
-}
+body {}
 
 .navbar-brand {
     position: absolute;
@@ -38,13 +36,24 @@ div.tooltip {
     display: none !important;
 }
 
-@media screen and (min-width: 768px){
-.jumbotron {
-  height: 100vh;
-}
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        height: 100vh;
+    }
 }
 
 .jumbotron {
+    height: 100vh;
+}
 
-  height: 100vh;
+#logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.btn-link {
+ 
+  font-size: large;
+  color: rgb(68, 68, 68);
 }
