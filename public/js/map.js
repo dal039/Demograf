@@ -7,7 +7,7 @@ var map = new Datamap({
     scope: 'regions',
     responsive: true,
     fills: {
-        defaultFill: 'green'
+        defaultFill: '#212121'
     },
     setProjection: function(element) {
         var projection = d3.geo.mercator()
