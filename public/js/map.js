@@ -11,8 +11,8 @@ var map = new Datamap({
     },
     setProjection: function(element) {
         var projection = d3.geo.mercator()
-            .center([-117.1625, 32.7150])
-            .scale(20000)
+            .center([-116.9, 32.9])
+            .scale(27000)
             .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
         var path = d3.geo.path().projection(projection);
         return {
