@@ -105,7 +105,7 @@ function hideTooltip() {
 */
 /////////////////////sliders/////////////////////
 $(function() {
-    $("#range").ionRangeSlider({
+    $("#range1").ionRangeSlider({
         type: "double",
         min: 0,
         max: 1000,
@@ -118,5 +118,34 @@ $(function() {
         grid_snap: true,
         force_edges: true
     });
-
+});
+$(function() {
+    $("#range2").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 1000,
+        to: 1000,
+        from: 0,
+        step: 100,
+        prettify_enabled: true,
+        prefix: "$",
+        grid: true,
+        grid_snap: true,
+        force_edges: true
+    });
+});
+$(function() {
+    $("#range3").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 1000,
+        to: 1000,
+        from: 0,
+        step: 100,
+        prettify_enabled: true,
+        prefix: "$",
+        grid: true,
+        grid_snap: true,
+        force_edges: true
+    });
 });
