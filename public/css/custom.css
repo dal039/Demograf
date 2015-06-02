@@ -49,9 +49,17 @@ div.tooltip {
 }
 
 #logo {
+  
+
+}
+
+#nav {
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    background-color: #212121;
+   
 }
 
 .btn-link {
@@ -62,6 +70,7 @@ div.tooltip {
 
 .btn-link:hover {
     background-color: #212121;
+    color: rgb(220, 220, 220);
 }
 
 #start {
