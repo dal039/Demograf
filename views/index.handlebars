@@ -1,49 +1,50 @@
 <div class="jumbotron">
     <div class="container">
         <h1 id="start">DEMOGRAF</h1>
-
         <p class="lead">DEMOGRAF</p>
-
         <p><a href="#form" class="btn btn-primary btn-lg" role="button">Start Exploring!</a></p>
     </div>
 </div>
 <div class="container-fluid" id="form">
     <h3>Filters
     </h3>
-
     <div class="row">
-        <div class="col-md-2">
-            <p>Median Income</p>
-            <input type="text" id="range1" value="" name="range1"/>
-            <br>
-
-            <p>Housing Cost</p>
-            <input type="text" id="range2" value="" name="range2"/>
-            <br>
-
-            <p>Median Contract Rent</p>
-            <input type="text" id="range3" value="" name="range3"/>
-            <br>
-
-            <p>Unemployed Percentage</p>
-            <input type="text" id="range4" value="" name="range4"/>
-            <br>
-        </div>
-        <div class="col-md-2">
-            <p>Below Poverty Percentage</p>
-            <input type="text" id="range5" value="" name="range5"/>
-            <br>
-
-            <p>Percentage of Single People</p>
-            <input type="text" id="range6" value="" name="range6"/>
-            <br>
-
-            <p>Percentage of People who speak another Language </p>
-            <input type="text" id="range7" value="" name="range7"/>
-            <br>
-
-            <p>Percentage of People (25+) who have at least a Bachelors Degree. </p>
-            <input type="text" id="range8" value="" name="range8"/>
+        <div class="col-md-4">
+            <div class="bs-example">
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="active"><a data-toggle="tab" href="#sectionA">Section A</a></li>
+                    <li><a data-toggle="tab" href="#sectionB">Section B</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="sectionA" class="tab-pane fade in active">
+                        <p>Median Income</p>
+                        <input type="text" id="range1" value="" name="range1" />
+                        <br>
+                        <p>Housing Cost</p>
+                        <input type="text" id="range2" value="" name="range2" />
+                        <br>
+                        <p>Median Contract Rent</p>
+                        <input type="text" id="range3" value="" name="range3" />
+                        <br>
+                        <p>Unemployed Percentage</p>
+                        <input type="text" id="range4" value="" name="range4" />
+                        <br>
+                    </div>
+                    <div id="sectionB" class="tab-pane fade">
+                        <p>Below Poverty Percentage</p>
+                        <input type="text" id="range5" value="" name="range5" />
+                        <br>
+                        <p>Percentage of Single People</p>
+                        <input type="text" id="range6" value="" name="range6" />
+                        <br>
+                        <p>Percentage of People who speak another Language </p>
+                        <input type="text" id="range7" value="" name="range7" />
+                        <br>
+                        <p>Percentage of People (25+) who have at least a Bachelors Degree. </p>
+                        <input type="text" id="range8" value="" name="range8" />
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-8">
             <div id="map"></div>
