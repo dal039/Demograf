@@ -54,8 +54,21 @@ router.use(function(req, res, next) {
 
 //routes
 router.get('/', index.view);
-router.get('/delphi_home_value_data', delphi.getHomeValueData);
-router.get('/delphi_housing_cost_data', delphi.getHousingCostData);
+router.get('/delphi_home_value', delphi.getHomeValue);
+router.get('/delphi_housing_cost', delphi.getHousingCost);
+router.get('/delphi_median_income', delphi.getMedianIncome);
+router.get('/delphi_employment_status', delphi.getEmploymentStatus);
+router.get('/delphi_education', delphi.getEducation);
+router.get('/delphi_population_by_age', delphi.getPopulationByAge);
+router.get('/delphi_population_by_gender', delphi.getPopulationByGender);
+router.get('/delphi_population_by_race', delphi.getPopulationByRace);
+router.get('/delphi_poverty', delphi.getPoverty);
+router.get('/delphi_public_programs', delphi.getPublicPrograms);
+router.get('/delphi_occupational_industry', delphi.getOccupationalIndustry);
+router.get('/delphi_marital_status', delphi.getMaritalStatus);
+router.get('/delphi_languages', delphi.getLanguages);
+router.get('/delphi_rental_statistics', delphi.getRentalStatistics);
+
 
 app.use('/', router);
 
