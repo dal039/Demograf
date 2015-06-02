@@ -54,9 +54,14 @@ div.tooltip {
 
 .btn-link {
     font-size: large;
-    color: rgb(68, 68, 68);
+    color: rgb(255, 255, 255);
+    background-color: #212121;
 }
 
+.btn-link:hover{
+    background-color: #212121;
+}
+}
 #start {
     padding-top: 200px;
 }
