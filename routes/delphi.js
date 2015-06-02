@@ -11,14 +11,17 @@ exports.getHomeValue = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_home_value_abs_2012_norm';
+        var query = 'SELECT "Area", "Median house value" FROM hhsa_san_diego_demographics_home_value_med_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
+
             res.end(JSON.stringify(result.rows));
         });
     });
@@ -32,6 +35,8 @@ exports.getHousingCost = function(req, res) {
 
         var query = 'SELECT * FROM hhsa_san_diego_demographics_housing_costs_2012';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -50,8 +55,10 @@ exports.getMedianIncome = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_median_income_2012_norm';
+        var query = 'SELECT "Area", "Median Household Income" FROM hhsa_san_diego_demographics_median_income_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -69,17 +76,22 @@ exports.getEmploymentStatus = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_employment_status_2012_norm';
+        var query = 'SELECT "Area", "Employment Status", "Population" FROM hhsa_san_diego_demographics_employment_status_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
+
+            //console.log(result);
             res.end(JSON.stringify(result.rows));
         });
     });
+
 };
 
 exports.getEducation = function(req, res) {
@@ -90,6 +102,8 @@ exports.getEducation = function(req, res) {
 
         var query = 'SELECT * FROM hhsa_san_diego_demographics_education_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -109,6 +123,8 @@ exports.getPopulationByAge = function(req, res) {
 
         var query = 'SELECT * FROM hhsa_san_diego_demographics_county_popul_by_age_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -128,6 +144,8 @@ exports.getPopulationByGender = function(req, res) {
 
         var query = 'SELECT * FROM hhsa_san_diego_demographics_county_popul_by_gender_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -147,6 +165,8 @@ exports.getPopulationByRace = function(req, res) {
 
         var query = 'SELECT * FROM hhsa_san_diego_demographics_county_popul_by_race_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);            
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -164,15 +184,29 @@ exports.getPoverty = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_poverty_2012_norm';
+        var query = 'SELECT "Area", "Population Type", "Total" FROM hhsa_san_diego_demographics_poverty_2012_norm ' + 
+                    'WHERE "Population Type" = \'Population for whom poverty status is determined\' ' +
+                    'OR "Population Type" = \'Total population below poverty\'';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
-            res.end(JSON.stringify(result.rows));
+
+            var filteredResults = [];
+            for(var i = 0; i < result.rows.length; i+=2) {
+                var areaObj = {'Area': result.rows[i].Area,
+                                'PopulationType': "Percentage below poverty", 
+                                'Total': result.rows[i+1].Total / result.rows[i].Total}
+
+                filteredResults.push(areaObj);
+            }
+
+            res.end(JSON.stringify(filteredResults));
         });
     });
 };
@@ -185,6 +219,8 @@ exports.getPublicPrograms = function(req, res) {
 
         var query = 'SELECT * FROM hhsa_san_diego_demographics_public_programs_2012';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -204,6 +240,8 @@ exports.getOccupationalIndustry = function(req, res) {
 
         var query = 'SELECT * FROM hhsa_san_diego_demographics_occupat_industry_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
@@ -221,15 +259,30 @@ exports.getMaritalStatus = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_marital_status_2012_norm';
+        var query = 'SELECT "Area", "Marital Status", "Total" FROM hhsa_san_diego_demographics_marital_status_2012_norm ' +
+                    'WHERE "Marital Status" = \'Any (Total Population 15+)\' ' +
+                    'OR "Marital Status" = \'Single\'';
         client.query(query, function(err, result) {
+
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
-            res.end(JSON.stringify(result.rows));
+
+            var filteredResults = [];
+            for(var i = 0; i < result.rows.length; i+=2) {
+                var areaObj = {'Area': result.rows[i].Area,
+                                'PopulationType': "Percentage single", 
+                                'Total': result.rows[i+1].Total / result.rows[i].Total}
+
+                filteredResults.push(areaObj);
+            }
+
+            res.end(JSON.stringify(filteredResults));
         });
     });
 };
@@ -240,15 +293,29 @@ exports.getLanguages = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_languages_2012_norm';
+        var query = 'SELECT "Area", "Languages Spoken", "Population" FROM hhsa_san_diego_demographics_languages_2012_norm ' +
+                    'WHERE "Languages Spoken" = \'Speak any language (Total population age 5 years and older)\' ' +
+                    'OR "Languages Spoken" = \'Speak other language - Total\'';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
-            res.end(JSON.stringify(result.rows));
+
+            var filteredResults = [];
+            for(var i = 0; i < result.rows.length; i+=2) {
+                var areaObj = {'Area': result.rows[i].Area,
+                                'Languages Spoken': "Percentage other language", 
+                                'Population': result.rows[i+1].Population / result.rows[i].Population}
+
+                filteredResults.push(areaObj);
+            }
+
+            res.end(JSON.stringify(filteredResults));
         });
     });
 };
@@ -259,8 +326,10 @@ exports.getRentalStatistics = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_rental_statistics_med_2012_norm';
+        var query = 'SELECT "Area", "Median contract rent" FROM hhsa_san_diego_demographics_rental_statistics_med_2012_norm';
         client.query(query, function(err, result) {
+            if (err) return console.log(err);
+
             // return the client to the connection pool for other requests to reuse
             done();
 

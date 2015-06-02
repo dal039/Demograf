@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var dotenv = require('dotenv');
+var pg = require('pg');
+
 
 var app = express();
 var router = express.Router();
@@ -54,6 +56,9 @@ router.use(function(req, res, next) {
 
 //routes
 router.get('/', index.view);
+
+// routes that will pull all delphi data and parse them in their respective 
+// functions in delphi.js
 router.get('/delphi_home_value', delphi.getHomeValue);
 router.get('/delphi_housing_cost', delphi.getHousingCost);
 router.get('/delphi_median_income', delphi.getMedianIncome);

@@ -1,18 +1,56 @@
+// regions info
+var regionInfo = { 
+    "Carlsbad" : {},
+    "Oceanside" : {},
+    "Pendleton" : {},
+    "San Dieguito" : {},
+    "Vista" : {},
+    "Coastal" : {},
+    "Del Mar-Mira Mesa" : {},
+    "Elliott-Navajo" : {},
+    "Kearny Mesa" : {},
+    "Miramar" : {},
+    "Peninsula" : {},
+    "University" : {},
+    "Central San Diego" : {},
+    "Mid City" : {},
+    "Southeastern San Diego" : {},
+    "Chula Vista" : {},
+    "Coronado" : {},
+    "National City" : {},
+    "South Bay" : {},
+    "Sweetwater" : {},
+    "Alpine" : {},
+    "El Cajon" : {},
+    "Harbison-Crest" : {},
+    "Jamul" : {},
+    "La Mesa" : {},
+    "Laguna-Pine Valley" : {},
+    "Lakeside" : {},
+    "Lemon Grove" : {},
+    "Mountain Empire" : {},
+    "Santee" : {},
+    "Spring Valley" : {},
+    "Anza-Borrego" : {},
+    "Escondido" : {},
+    "Fallbrook" : {},
+    "North San Diego" : {},
+    "Palomar-Julian" : {},
+    "Pauma" : {},
+    "Poway" : {},
+    "Ramona" : {},
+    "San Marcos" : {},
+    "Valley Center" : {}
+};
+
 var DelphiDemo = DelphiDemo || (function() {
     var self = {};
     /** 
      * Send an ajax request to the server to retrieve delphi db data.
      */
     self.getDelphiData = function() {
+        
         $.getJSON("/delphi_home_value", function(data) {
-            
-            /*var rows = $.map(data, function(item, i) {
-                return "<tr><td>" + item.year + "</td><td>" + item.gender + "</td><td>" + item.percentage_of_current_smokers + "</td><td>" + item.number_of_respondents + "</td></tr>";
-            }).join("");
-
-            $("#delphi-table").append(rows);
-            */
-
             console.log(data);
         });
 
@@ -64,9 +102,6 @@ var DelphiDemo = DelphiDemo || (function() {
             console.log(data);
         });
 
-
-
-
     };
 
 
@@ -81,5 +116,6 @@ var DelphiDemo = DelphiDemo || (function() {
 })();
 
 $(document).ready(function() {
+
     DelphiDemo.init();
 });
