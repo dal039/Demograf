@@ -1,4 +1,5 @@
-body {}
+body {
+}
 
 .navbar-brand {
     position: absolute;
@@ -58,10 +59,10 @@ div.tooltip {
     background-color: #212121;
 }
 
-.btn-link:hover{
+.btn-link:hover {
     background-color: #212121;
 }
-}
+
 #start {
     padding-top: 200px;
 }
