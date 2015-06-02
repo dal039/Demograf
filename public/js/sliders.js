@@ -62,3 +62,52 @@ $(function() {
         force_edges: true,
     });
 });
+
+
+//Poverty %
+$(function() {
+    $("#range5").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 100,
+        step: 10,
+        prettify_enabled: true,
+        postfix: "%",
+        grid: true,
+        grid_snap: true,
+        force_edges: true,
+    });
+});
+
+
+//Single %
+$(function() {
+    $("#range6").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 100,
+        step: 10,
+        prettify_enabled: true,
+        postfix: "%",
+        grid: true,
+        grid_snap: true,
+        force_edges: true,
+    });
+});
+
+
+//Speak Other Language %
+$(function() {
+    $("#range7").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 100,
+        step: 10,
+        prettify_enabled: true,
+        postfix: "%",
+        grid: true,
+        grid_snap: true,
+        force_edges: true,
+    });
+});
+
