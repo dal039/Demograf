@@ -27,9 +27,9 @@
             <div class="col-md-4">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a data-toggle="tab" href="#tab1">Economic</a></li>
-                    <li><a data-toggle="tab" href="#tab2">Tab 2</a></li>
-                    <li><a data-toggle="tab" href="#tab3">Tab 3</a></li>
-                    <li><a data-toggle="tab" href="#tab4">Tab 4</a></li>
+                    <li><a data-toggle="tab" href="#tab2">Housing</a></li>
+                    <li><a data-toggle="tab" href="#tab3">Social</a></li>
+                    <li><a data-toggle="tab" href="#tab4">Education</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="tab1" class="tab-pane fade in active">
@@ -50,10 +50,89 @@
                         <br>
                     </div>
                     <div id="tab2" class="tab-pane fade">
+                        <p>Median House Value</p>
+                        <input type="text" id="house_value" value="" name="house_value" />
+                        <br>
+                        <p>Median Contract Rent</p>
+                        <input type="text" id="rent" value="" name="rent" />
                     </div>
                     <div id="tab3" class="tab-pane fade">
+                        <p>Most Popular Occupation</p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <select id="occupation" name="occupation" class="form-control">
+                                        <option value="187939662">All</option>
+                                        <option value="187939663">Agriculture, forestry, mining</option>
+                                        <option value="187939664">Utilities</option>
+                                        <option value="187939665">Construction</option>
+                                        <option value="187939666">Manufacturing</option>
+                                        <option value="187939667">Wholesale trade</option>
+                                        <option value="187939668">Retail trade</option>
+                                        <option value="187939669">Transportation, Warehousing, and Utilities</option>
+                                        <option value="187939670">Information and communications</option>
+                                        <option value="187939671">Finance, insurance, and real estate</option>
+                                        <option value="187939672">Professional, scientific, management, administrative</option>
+                                        <option value="187939673">Educational, social and health services</option>
+                                        <option value="187939674">Arts, entertainment, recreation, accommodations, food services</option>
+                                        <option value="187939675">Other services</option>
+                                        <option value="187939676">Public administration</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <p>Most Popular Race</p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <select id="race" name="race" class="form-control">
+                                        <option value="all">All</option>
+                                        <option value="white">White</option>
+                                        <option value="hispanic">Hispanic</option>
+                                        <option value="black">Black</option>
+                                        <option value="asian_pacific_islander">Asian Pacific Islander</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <p>Most Popular Age</p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <select id="age" name="age" class="form-control">
+                                        <option value="all">All</option>
+                                        <option value="0-4">0-4</option>
+                                        <option value="5-14">5-14</option>
+                                        <option value="5-24">5-24</option>
+                                        <option value="45-64">45-64</option>
+                                        <option value="65+">65+</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <p>Most Popular Sex</p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <select id="sex" name="sex" class="form-control">
+                                        <option value="all">All</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                     <div id="tab4" class="tab-pane fade">
+                        <p>Percentage of People with Bachelor's Degree or Higher</p>
+                        <input type="text" id="degree" value="" name="degree" />
+                        <br>
+                        <p>Percentage of People who Speak Another Language</p>
+                        <input type="text" id="language" value="" name="language" />
                     </div>
                 </div>
             </div>
