@@ -20,11 +20,9 @@ $(function() {
         type: "double",
         min: 190000,
         max: 730000,
-
         step: 10000,
         prettify_enabled: true,
         prefix: "$",
-
         grid_snap: true,
         force_edges: true
     });
@@ -36,7 +34,6 @@ $(function() {
         type: "double",
         min: 790,
         max: 2000,
-
         step: 100,
         prettify_enabled: true,
         prefix: "$",
@@ -111,3 +108,28 @@ $(function() {
     });
 });
 
+//At least a Bachelors  Degree %
+$(function() {
+    $("#range8").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 100,
+        step: 10,
+        prettify_enabled: true,
+        postfix: "%",
+        grid: true,
+        grid_snap: true,
+        force_edges: true,
+    });
+});
+
+//prints values
+$(function() {
+    $("#range8").on("change", function() {
+        var $this = $(this),
+            from = $this.data("from"),
+            to = $this.data("to");
+
+        console.log(from + " - " + to);
+    });
+});
