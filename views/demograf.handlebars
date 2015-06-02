@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demograf - Main Page</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demograf</title>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/paper.min.css">
+    <link rel="stylesheet" href="css/d3-tip.css">
+    <link rel="stylesheet" href="css/ion.rangeSlider.css">
+    <link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+    <div class="container-fluid" id="form">
+        <h3>Filters
+        </h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="bs-example">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a data-toggle="tab" href="#sectionA">Section A</a></li>
+                        <li><a data-toggle="tab" href="#sectionB">Section B</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="sectionA" class="tab-pane fade in active">
+                            <p>Median Income</p>
+                            <input type="text" id="range1" value="" name="range1" />
+                            <br>
+                            <p>Housing Cost</p>
+                            <input type="text" id="range2" value="" name="range2" />
+                            <br>
+                            <p>Median Contract Rent</p>
+                            <input type="text" id="range3" value="" name="range3" />
+                            <br>
+                            <p>Unemployed Percentage</p>
+                            <input type="text" id="range4" value="" name="range4" />
+                            <br>
+                        </div>
+                        <div id="sectionB" class="tab-pane fade">
+                            <p>Below Poverty Percentage</p>
+                            <input type="text" id="range5" value="" name="range5" />
+                            <br>
+                            <p>Percentage of Single People</p>
+                            <input type="text" id="range6" value="" name="range6" />
+                            <br>
+                            <p>Percentage of People who speak another Language </p>
+                            <input type="text" id="range7" value="" name="range7" />
+                            <br>
+                            <p>Percentage of People (25+) who have at least a Bachelors Degree. </p>
+                            <input type="text" id="range8" value="" name="range8" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+    <a href="/" id="logo" class="btn btn-link " role="button">DEMOGRAF</a>
+
+    <!-- js libs -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3-tip.js"></script>
+    <script src="js/topojson.min.js"></script>
+    <script src="js/datamaps.none.min.js"></script>
+    <script src="js/ion.rangeSlider.min.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/sliders.js"></script>
+    <script src="js/demograf.js"></script>
+
+</body>
+
+</html>

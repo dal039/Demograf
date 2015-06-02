@@ -15,6 +15,7 @@ var router = express.Router();
 
 // declare routes
 var index = require('./routes/index');
+var demograf = require('./routes/demograf');
 var delphi = require('./routes/delphi');
 
 //client id and client secret here, taken from .env
@@ -24,9 +25,7 @@ dotenv.load();
 var conString = process.env.DELPHI_CONNECTION_URL;
 
 //Configures the Template engine
-app.engine('handlebars', handlebars({
-    defaultLayout: 'layout'
-}));
+app.engine('handlebars', handlebars({}));
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -56,6 +55,7 @@ router.use(function(req, res, next) {
 
 //routes
 router.get('/', index.view);
+router.get('/demograf', demograf.view)
 
 // routes that will pull all delphi data and parse them in their respective 
 // functions in delphi.js
