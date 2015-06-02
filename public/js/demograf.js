@@ -66,6 +66,10 @@ var DelphiDemo = DelphiDemo || (function() {
             console.log(data);
         });
 
+        $.getJSON("/delphi_education", function(data) {
+            console.log(data);
+        });
+
         $.getJSON("/delphi_population_by_age", function(data) {
             console.log(data);
         });
@@ -118,5 +122,5 @@ var DelphiDemo = DelphiDemo || (function() {
 $(document).ready(function() {
 
     DelphiDemo.init();
-    
+
 });
