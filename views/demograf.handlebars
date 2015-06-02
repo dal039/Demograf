@@ -25,39 +25,35 @@
         </h3>
         <div class="row">
             <div class="col-md-4">
-                <div class="bs-example">
-                    <ul class="nav nav-tabs nav-justified">
-                        <li class="active"><a data-toggle="tab" href="#sectionA">Section A</a></li>
-                        <li><a data-toggle="tab" href="#sectionB">Section B</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="sectionA" class="tab-pane fade in active">
-                            <p>Median Income</p>
-                            <input type="text" id="range1" value="" name="range1" />
-                            <br>
-                            <p>Housing Cost</p>
-                            <input type="text" id="range2" value="" name="range2" />
-                            <br>
-                            <p>Median Contract Rent</p>
-                            <input type="text" id="range3" value="" name="range3" />
-                            <br>
-                            <p>Unemployed Percentage</p>
-                            <input type="text" id="range4" value="" name="range4" />
-                            <br>
-                        </div>
-                        <div id="sectionB" class="tab-pane fade">
-                            <p>Below Poverty Percentage</p>
-                            <input type="text" id="range5" value="" name="range5" />
-                            <br>
-                            <p>Percentage of Single People</p>
-                            <input type="text" id="range6" value="" name="range6" />
-                            <br>
-                            <p>Percentage of People who speak another Language </p>
-                            <input type="text" id="range7" value="" name="range7" />
-                            <br>
-                            <p>Percentage of People (25+) who have at least a Bachelors Degree. </p>
-                            <input type="text" id="range8" value="" name="range8" />
-                        </div>
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="active"><a data-toggle="tab" href="#tab1">Economic</a></li>
+                    <li><a data-toggle="tab" href="#tab2">Tab 2</a></li>
+                    <li><a data-toggle="tab" href="#tab3">Tab 3</a></li>
+                    <li><a data-toggle="tab" href="#tab4">Tab 4</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane fade in active">
+                        <p>Median Income</p>
+                        <input type="text" id="income" value="" name="income" />
+                        <br>
+                        <p>Unemployed Percentage</p>
+                        <input type="text" id="unemployed" value="" name="unemployed" />
+                        <br>
+                        <p>Percentage of those with SNAP</p>
+                        <input type="text" id="snap" value="" name="snap" />
+                        <br>
+                        <p>Percentage of those with Cash Assistance</p>
+                        <input type="text" id="cash_assistance" value="" name="cash_assistance" />
+                        <br>
+                        <p>Poverty Percentage</p>
+                        <input type="text" id="poverty" value="" name="poverty" />
+                        <br>
+                    </div>
+                    <div id="tab2" class="tab-pane fade">
+                    </div>
+                    <div id="tab3" class="tab-pane fade">
+                    </div>
+                    <div id="tab4" class="tab-pane fade">
                     </div>
                 </div>
             </div>
@@ -80,7 +76,6 @@
     <script src="js/map.js"></script>
     <script src="js/sliders.js"></script>
     <script src="js/demograf.js"></script>
-    
 </body>
 
 </html>
