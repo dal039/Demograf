@@ -104,14 +104,13 @@ function hideTooltip() {
 
 */
 /////////////////////sliders/////////////////////
+//Monthly Income
 $(function() {
     $("#range1").ionRangeSlider({
         type: "double",
-        min: 0,
-        max: 1000,
-        to: 1000,
-        from: 0,
-        step: 100,
+        min: 40000,
+        max: 130000,
+        step: 10000,
         prettify_enabled: true,
         prefix: "$",
         grid: true,
@@ -119,33 +118,52 @@ $(function() {
         force_edges: true
     });
 });
+
+//Home Value
 $(function() {
     $("#range2").ionRangeSlider({
         type: "double",
-        min: 0,
-        max: 1000,
-        to: 1000,
-        from: 0,
+        min: 190000,
+        max: 730000,
+
+        step: 10000,
+        prettify_enabled: true,
+        prefix: "$",
+
+        grid_snap: true,
+        force_edges: true
+    });
+});
+
+//Median Contract Rent
+$(function() {
+    $("#range3").ionRangeSlider({
+        type: "double",
+        min: 790,
+        max: 2000,
+
         step: 100,
         prettify_enabled: true,
         prefix: "$",
+        max_postfix: "+",
         grid: true,
         grid_snap: true,
         force_edges: true
     });
 });
+
+
+//Employment status
 $(function() {
-    $("#range3").ionRangeSlider({
+    $("#range4").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 1000,
-        to: 1000,
-        from: 0,
-        step: 100,
+        max: 100,
+        step: 10,
         prettify_enabled: true,
-        prefix: "$",
+        postfix: "%",
         grid: true,
         grid_snap: true,
-        force_edges: true
+        force_edges: true,
     });
 });
