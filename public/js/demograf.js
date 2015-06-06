@@ -5,7 +5,6 @@ var infoSlide = function(theArea) {
     ($('#sidr').html('<p>'+ theArea + '</p>'));
 }
 
-
 /*****************************************************************************************
 *************************************** SLIDERS ******************************************
 *****************************************************************************************/
@@ -251,14 +250,14 @@ var Demograf = Demograf || (function() {
         });
 
         $.getJSON("/delphi_housing_cost", function(data) {
-            console.log(data);
             for(var i = 0; i < data.length; ++i) {
                 for ( var key in self.regionInfo) {
                     if( self.regionInfo.hasOwnProperty(key) ) {
                         
                         // if current data Area matches current Region area
                         if(key == data[i].Area) {
-                            (self.regionInfo[key])['Housing Cost'] = (data[i])['Median house value'];
+                            delete data[i].Area;
+                            (self.regionInfo[key])['Housing Cost'] = (data[i]);
                             break;
                         }
                     }
@@ -296,12 +295,13 @@ var Demograf = Demograf || (function() {
         $.getJSON("/delphi_population_by_gender", function(data) {
             console.log(data);
         });
+        */
 
         $.getJSON("/delphi_population_by_race", function(data) {
             console.log(data);
         });
 
-        $.getJSON("/delphi_poverty", function(data) {
+        /*$.getJSON("/delphi_poverty", function(data) {
             console.log(data);
         });
 
@@ -384,7 +384,7 @@ $(document).ready(function() {
         Demograf.map.resize();
     });
 
-    //console.log(Demograf.regionInfo);
+    console.log(Demograf.regionInfo);
 });
 
 $('.navmenu').offcanvas({autohide:'false'});

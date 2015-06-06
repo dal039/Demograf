@@ -34,7 +34,7 @@ exports.getHousingCost = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT "Percent of Household Income on Housing <20% (Average)", '  +
+        var query = 'SELECT "Area", "Percent of Household Income on Housing <20% (Average)", '  +
                             '"Percent of Household Income on Housing 20-29% (Average)", ' +
                             '"Percent of Household Income on Housing  >30% (Average)" ' +
                     'FROM hhsa_san_diego_demographics_housing_costs_2012';
@@ -193,7 +193,14 @@ exports.getPopulationByRace = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_county_popul_by_race_2012_norm';
+        var query = 'SELECT MAX("Population") ' + 
+                    'FROM hhsa_san_diego_demographics_county_popul_by_race_2012_norm ' +
+                    'WHERE "Race" = \'White\' ' +
+                    'OR "Race" = \'Hispanic\' ' +
+                    'OR "Race" = \'Black\' ' +
+                    'OR "Race" = \'Asian/Pacific Islander\' ' +
+                    'OR "Race" = \'Other Race/Ethnicity\' '
+                    'GROUP BY "Population"';     
         client.query(query, function(err, result) {
             if (err) return console.log(err);            
 
@@ -203,6 +210,8 @@ exports.getPopulationByRace = function(req, res) {
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
+
+            console.log(result.rows);
             res.end(JSON.stringify(result.rows));
         });
     });
