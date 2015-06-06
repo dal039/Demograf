@@ -287,18 +287,42 @@ var Demograf = Demograf || (function() {
         $.getJSON("/delphi_education", function(data) {
             console.log(data);
         });
-
-        $.getJSON("/delphi_population_by_age", function(data) {
-            console.log(data);
-        });
-
-        $.getJSON("/delphi_population_by_gender", function(data) {
-            console.log(data);
-        });
+        
         */
+        $.getJSON("/delphi_population_by_age", function(data) {
+            for(var i = 0; i < data.length; ++i) {
+                for ( var key in self.regionInfo) {
+                    if( self.regionInfo.hasOwnProperty(key) ) {
+                        
+                        // if current data Area matches current Region area
+                        if(key == data[i].Area) {
+                            delete data[i].Area;
+                            (self.regionInfo[key])['Age Population'] = (data[i]);
+                            break;
+                        }                    
+                    }
+                }
+            }
+        });
+
+        //$.getJSON("/delphi_population_by_gender", function(data) {
+        //    console.log(data);
+        //});
 
         $.getJSON("/delphi_population_by_race", function(data) {
-            console.log(data);
+            for(var i = 0; i < data.length; ++i) {
+                for ( var key in self.regionInfo) {
+                    if( self.regionInfo.hasOwnProperty(key) ) {
+                        
+                        // if current data Area matches current Region area
+                        if(key == data[i].Area) {
+                            delete data[i].Area;
+                            (self.regionInfo[key])['Race Population'] = (data[i]);
+                            break;
+                        }                    
+                    }
+                }
+            }
         });
 
         /*$.getJSON("/delphi_poverty", function(data) {
