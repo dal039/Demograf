@@ -48,6 +48,10 @@ exports.getHousingCost = function(req, res) {
                 'content-type': 'application/json'
             });
 
+            for( var i = 0; i < result.rows.length; ++i ) {
+                result.rows[i].Area = checkAreaName(result.rows[i].Area);
+            }
+
             res.end(JSON.stringify(result.rows));
         });
     });
@@ -98,8 +102,8 @@ exports.getEmploymentStatus = function(req, res) {
 
             var filteredResults = [];
             for(var i = 0; i < result.rows.length; i+=2) {
-                var areaObj = {'Area': result.rows[i].Area,
-                                'Percentage_Unemployed': result.rows[i+1].Population / result.rows[i].Population };
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area),
+                                'Percentage Unemployed': result.rows[i+1].Population / result.rows[i].Population };
 
                 filteredResults.push(areaObj);
             }
@@ -133,8 +137,8 @@ exports.getEducation = function(req, res) {
 
             var filteredResults = [];
             for(var i = 0; i < result.rows.length; i+=2) {
-                var areaObj = {'Area': result.rows[i].Area,
-                                'Percentage_Educated': result.rows[i+1].Population / result.rows[i].Population };
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area),
+                                'Percentage Educated': result.rows[i+1].Population / result.rows[i].Population };
 
                 filteredResults.push(areaObj);
             }
@@ -166,7 +170,7 @@ exports.getPopulationByAge = function(req, res) {
 
             var filteredResults = [];
             for(var i = 1; i < result.rows.length; i+=7) {
-                var areaObj = {'Area': result.rows[i].Area};
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area) };
 
                 var largestPop = 0;
                 var largestAge = "";
@@ -206,7 +210,8 @@ exports.getPopulationByGender = function(req, res) {
 
             var filteredResults = [];
             for(var i = 1; i < result.rows.length; i+=3) {
-                var areaObj = {'Area': result.rows[i].Area};
+
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area) };
 
                 var largestPop = 0;
                 var largestGender = "";
@@ -222,7 +227,6 @@ exports.getPopulationByGender = function(req, res) {
                 filteredResults.push(areaObj);
             }
 
-            console.log(filteredResults);
             res.end(JSON.stringify(filteredResults));        
         });
     });
@@ -249,7 +253,7 @@ exports.getPopulationByRace = function(req, res) {
 
             var filteredResults = [];
             for(var i = 1; i < result.rows.length; i+=6) {
-                var areaObj = {'Area': result.rows[i].Area};
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area) };
 
                 var largestPop = 0;
                 var largestRace = "";
@@ -292,8 +296,8 @@ exports.getPoverty = function(req, res) {
 
             var filteredResults = [];
             for(var i = 0; i < result.rows.length; i+=2) {
-                var areaObj = {'Area': result.rows[i].Area,
-                                'Percentage_Below_Poverty': result.rows[i+1].Total / result.rows[i].Total };
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area),
+                                'Percentage Below Poverty': result.rows[i+1].Total / result.rows[i].Total };
 
                 filteredResults.push(areaObj);
             }
@@ -323,9 +327,9 @@ exports.getPublicPrograms = function(req, res) {
 
             var filteredResults = [];
             for(var i = 0; i < result.rows.length; i+=2) {
-                var areaObj = {'Area': result.rows[i].Area,
-                                'Percentage_With_SNAP': (result.rows[i])['Households With SNAP'] / (result.rows[i])['Total Households'], 
-                                'Percentage_With_Cash_Assistance': (result.rows[i])['Households With Cash Assistance'] / (result.rows[i])['Total Households']};
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area),
+                                'Percentage With SNAP': (result.rows[i])['Households With SNAP'] / (result.rows[i])['Total Households'], 
+                                'Percentage With Cash Assistance': (result.rows[i])['Households With Cash Assistance'] / (result.rows[i])['Total Households']};
 
                 filteredResults.push(areaObj);
             }
@@ -379,8 +383,8 @@ exports.getMaritalStatus = function(req, res) {
 
             var filteredResults = [];
             for(var i = 0; i < result.rows.length; i+=2) {
-                var areaObj = {'Area': result.rows[i].Area,
-                                'Percentage_Single': result.rows[i+1].Total / result.rows[i].Total };
+                var areaObj = {'Area': checkAreaName(result.rows[i].Area),
+                                'Percentage Single': result.rows[i+1].Total / result.rows[i].Total };
 
                 filteredResults.push(areaObj);
             }
@@ -413,7 +417,7 @@ exports.getLanguages = function(req, res) {
             var filteredResults = [];
             for(var i = 0; i < result.rows.length; i+=2) {
                 var areaObj = {'Area': result.rows[i].Area,
-                                'Percentage_Other_Language': result.rows[i+1].Population / result.rows[i].Population };
+                                'Percentage Other Language': result.rows[i+1].Population / result.rows[i].Population };
 
                 filteredResults.push(areaObj);
             }
@@ -444,4 +448,34 @@ exports.getRentalStatistics = function(req, res) {
         });
     });
 };
+
+var checkAreaName = function(area) {
+
+    var retName = area;
+
+    switch(area) {
+        case "Central SD":
+            retName = "Central San Diego";
+            break;
+        case "North SD":
+            retName = "North San Diego";
+            break;
+        case "Southeast SD":
+            retName = "Southeastern San Diego";
+            break;
+        case "Anza-Borrego Springs":
+            retName = "Anza-Borrego";
+            break;    
+        case "Harbison Crest":
+            retName = "Harbison-Crest";
+            break;
+        case "Mid-City":
+            retName = "Mid City";
+            break;
+        default:
+            break;
+    }
+
+    return retName;
+}
 

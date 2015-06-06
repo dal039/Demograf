@@ -281,15 +281,36 @@ var Demograf = Demograf || (function() {
             }
         });
 
-        /*$.getJSON("/delphi_employment_status", function(data) {
-            console.log(data);
+        $.getJSON("/delphi_employment_status", function(data) {
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            (self.regionInfo[key])['Percentage Unemployed'] = (data[i])['Percentage Unemployed'];
+                            break;
+                        }
+                    }
+                }
+            }
         });
 
         $.getJSON("/delphi_education", function(data) {
-            console.log(data);
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            (self.regionInfo[key])['Percentage Educated'] = (data[i])['Percentage Educated'];
+                            break;
+                        }
+                    }
+                }
+            }
         });
         
-        */
         $.getJSON("/delphi_population_by_age", function(data) {
             for (var i = 0; i < data.length; ++i) {
                 for (var key in self.regionInfo) {
@@ -338,27 +359,61 @@ var Demograf = Demograf || (function() {
             }
         });
 
-        /*$.getJSON("/delphi_poverty", function(data) {
-            console.log(data);
+        $.getJSON("/delphi_poverty", function(data) {
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            (self.regionInfo[key])['Percentage Below Poverty'] = (data[i])['Percentage Below Poverty'];
+                            break;
+                        }
+                    }
+                }
+            }        
         });
 
         $.getJSON("/delphi_public_programs", function(data) {
-            console.log(data);
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            delete data[i].Area;
+                            (self.regionInfo[key])['Public Programs'] = (data[i]);
+                            break;
+                        }
+                    }
+                }
+            }
         });
 
-        $.getJSON("/delphi_occupational_industry", function(data) {
-            console.log(data);
-        });
+        //$.getJSON("/delphi_occupational_industry", function(data) {
+          //  console.log(data);
+        //});
 
         $.getJSON("/delphi_marital_status", function(data) {
-            console.log(data);
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            (self.regionInfo[key])['Percentage Single'] = (data[i])['Percentage Single'];
+                            break;
+                        }
+                    }
+                }
+            }                
         });
 
-        $.getJSON("/delphi_languages", function(data) {
+        /*$.getJSON("/delphi_languages", function(data) {
             console.log(data);
-        });
+        });*/
 
-        $.getJSON("/delphi_rental_statistics", function(data) {
+        /*$.getJSON("/delphi_rental_statistics", function(data) {
             console.log(data);
         });*/
 
@@ -420,10 +475,12 @@ $(document).ready(function() {
     $(window).on('resize', function() {
         Demograf.map.resize();
     });
+
     $('#simple-menu').sidr({
         name: 'side_menu',
         side: 'right'
     });
+
     $("html").on("click", function(e) {
         console.log("CLASS: " + $(event.target).attr('class'));
         if (!($(event.target).hasClass('datamaps-subunit'))) {
