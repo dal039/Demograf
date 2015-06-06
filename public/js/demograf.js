@@ -2,7 +2,7 @@
  ********************************** HELPER FUNCTIONS **************************************
  *****************************************************************************************/
 var infoSlide = function(theArea) {
-    ($('#side_menu').html('  <a href="#" class="btn btn-link" onclick="$.sidr("close", "side_menu");">X</a><p>' + theArea + '</p>'));
+    ($('#side_menu').html('  <a href="#" class="btn btn-link" onclick="$.sidr("close", "side_menu");"><i class="fa fa-times"></i></a><p>' + theArea + '</p>'));
     $.sidr('open', 'side_menu');
 }
 
@@ -310,7 +310,7 @@ var Demograf = Demograf || (function() {
                 }
             }
         });
-        
+
         $.getJSON("/delphi_population_by_age", function(data) {
             for (var i = 0; i < data.length; ++i) {
                 for (var key in self.regionInfo) {
@@ -371,7 +371,7 @@ var Demograf = Demograf || (function() {
                         }
                     }
                 }
-            }        
+            }
         });
 
         $.getJSON("/delphi_public_programs", function(data) {
@@ -391,7 +391,7 @@ var Demograf = Demograf || (function() {
         });
 
         //$.getJSON("/delphi_occupational_industry", function(data) {
-          //  console.log(data);
+        //  console.log(data);
         //});
 
         $.getJSON("/delphi_marital_status", function(data) {
@@ -406,7 +406,7 @@ var Demograf = Demograf || (function() {
                         }
                     }
                 }
-            }                
+            }
         });
 
         /*$.getJSON("/delphi_languages", function(data) {
