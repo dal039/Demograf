@@ -1,4 +1,12 @@
 /*****************************************************************************************
+********************************** HELPER FUNCTIONS **************************************
+*****************************************************************************************/
+var infoSlide = function(theArea) {
+    ($('#block').html('<p>'+ theArea + '</p>'));
+}
+
+
+/*****************************************************************************************
 *************************************** SLIDERS ******************************************
 *****************************************************************************************/
 
@@ -171,71 +179,109 @@ $(function() {
 ************************************ D3/GEOJSON MAP **************************************
 *****************************************************************************************/
 
-// regions info
-var regionInfo = { 
-    "Carlsbad" : {},
-    "Oceanside" : {},
-    "Pendleton" : {},
-    "San Dieguito" : {},
-    "Vista" : {},
-    "Coastal" : {},
-    "Del Mar-Mira Mesa" : {},
-    "Elliott-Navajo" : {},
-    "Kearny Mesa" : {},
-    "Miramar" : {},
-    "Peninsula" : {},
-    "University" : {},
-    "Central San Diego" : {},
-    "Mid City" : {},
-    "Southeastern San Diego" : {},
-    "Chula Vista" : {},
-    "Coronado" : {},
-    "National City" : {},
-    "South Bay" : {},
-    "Sweetwater" : {},
-    "Alpine" : {},
-    "El Cajon" : {},
-    "Harbison-Crest" : {},
-    "Jamul" : {},
-    "La Mesa" : {},
-    "Laguna-Pine Valley" : {},
-    "Lakeside" : {},
-    "Lemon Grove" : {},
-    "Mountain Empire" : {},
-    "Santee" : {},
-    "Spring Valley" : {},
-    "Anza-Borrego" : {},
-    "Escondido" : {},
-    "Fallbrook" : {},
-    "North San Diego" : {},
-    "Palomar-Julian" : {},
-    "Pauma" : {},
-    "Poway" : {},
-    "Ramona" : {},
-    "San Marcos" : {},
-    "Valley Center" : {}
-};
 
-var DelphiDemo = DelphiDemo || (function() {
+var Demograf = Demograf || (function() {
     var self = {};
     /** 
      * Send an ajax request to the server to retrieve delphi db data.
      */
+
+
+
     self.getDelphiData = function() {
         
-        /*$.getJSON("/delphi_home_value", function(data) {
-            console.log(data);
+        // regions info
+        self.regionInfo = { 
+            "Carlsbad" : {},
+            "Oceanside" : {},
+            "Pendleton" : {},
+            "San Dieguito" : {},
+            "Vista" : {},
+            "Coastal" : {},
+            "Del Mar-Mira Mesa" : {},
+            "Elliott-Navajo" : {},
+            "Kearny Mesa" : {},
+            "Miramar" : {},
+            "Peninsula" : {},
+            "University" : {},
+            "Central San Diego" : {},
+            "Mid City" : {},
+            "Southeastern San Diego" : {},
+            "Chula Vista" : {},
+            "Coronado" : {},
+            "National City" : {},
+            "South Bay" : {},
+            "Sweetwater" : {},
+            "Alpine" : {},
+            "El Cajon" : {},
+            "Harbison-Crest" : {},
+            "Jamul" : {},
+            "La Mesa" : {},
+            "Laguna-Pine Valley" : {},
+            "Lakeside" : {},
+            "Lemon Grove" : {},
+            "Mountain Empire" : {},
+            "Santee" : {},
+            "Spring Valley" : {},
+            "Anza-Borrego" : {},
+            "Escondido" : {},
+            "Fallbrook" : {},
+            "North San Diego" : {},
+            "Palomar-Julian" : {},
+            "Pauma" : {},
+            "Poway" : {},
+            "Ramona" : {},
+            "San Marcos" : {},
+            "Valley Center" : {}
+        };
+
+        $.getJSON("/delphi_home_value", function(data) {
+            for(var i = 0; i < data.length; ++i) {
+                for ( var key in self.regionInfo) {
+                    if( self.regionInfo.hasOwnProperty(key) ) {
+                        
+                        // if current data Area matches current Region area
+                        if(key == data[i].Area) {
+                            (self.regionInfo[key])['Median House Value'] = (data[i])['Median house value'];
+                            break;
+                        }
+                    }
+                }
+            }
         });
 
         $.getJSON("/delphi_housing_cost", function(data) {
             console.log(data);
+            for(var i = 0; i < data.length; ++i) {
+                for ( var key in self.regionInfo) {
+                    if( self.regionInfo.hasOwnProperty(key) ) {
+                        
+                        // if current data Area matches current Region area
+                        if(key == data[i].Area) {
+                            (self.regionInfo[key])['Housing Cost'] = (data[i])['Median house value'];
+                            break;
+                        }
+                    }
+                }
+            }
         });
 
-        $.getJSON("/delphi_median_income", function(data) {
-            console.log(data);
+        $.getJSON("/delphi_median_income", function(data) { 
+            for(var i = 0; i < data.length; ++i) {
+                for ( var key in self.regionInfo) {
+                    if( self.regionInfo.hasOwnProperty(key) ) {
+                        
+                        // if current data Area matches current Region area
+                        if(key == data[i].Area) {
+                            (self.regionInfo[key])['Median Income'] = (data[i])['Median Household Income'];
+                            break;
+                        }
+                    }
+                }
+            }
         });
-
-        $.getJSON("/delphi_employment_status", function(data) {
+        
+        /*$.getJSON("/delphi_employment_status", function(data) {
             console.log(data);
         });
 
@@ -307,6 +353,7 @@ var DelphiDemo = DelphiDemo || (function() {
             done: function(datamap) {
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
                     console.log(geography.properties.name);
+                    infoSlide(geography.properties.name);
                 });
             }
         });
@@ -331,11 +378,11 @@ var DelphiDemo = DelphiDemo || (function() {
 
 $(document).ready(function() {
 
-    DelphiDemo.init();
+    Demograf.init();
 
     $(window).on('resize', function() {
-        DelphiDemo.map.resize();
+        Demograf.map.resize();
     });
 
-    (DelphiDemo.map.svg[0])[0].id = "demograf-map";    
+    //console.log(Demograf.regionInfo);
 });

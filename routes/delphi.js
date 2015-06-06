@@ -34,7 +34,10 @@ exports.getHousingCost = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_housing_costs_2012';
+        var query = 'SELECT "Percent of Household Income on Housing <20% (Average)", '  +
+                            '"Percent of Household Income on Housing 20-29% (Average)", ' +
+                            '"Percent of Household Income on Housing  >30% (Average)" ' +
+                    'FROM hhsa_san_diego_demographics_housing_costs_2012';
         client.query(query, function(err, result) {
             if (err) return console.log(err);
 
@@ -44,6 +47,7 @@ exports.getHousingCost = function(req, res) {
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
+
             res.end(JSON.stringify(result.rows));
         });
     });
