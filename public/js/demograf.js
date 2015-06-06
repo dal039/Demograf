@@ -2,7 +2,9 @@
 ********************************** HELPER FUNCTIONS **************************************
 *****************************************************************************************/
 var infoSlide = function(theArea) {
-    ($('#sidr').html('<p>'+ theArea + '</p>'));
+    ($('#side_menu').html('<p>'+ theArea + '</p>'));
+         $.sidr('open', 'side_menu');
+
 }
 
 /*****************************************************************************************
@@ -410,5 +412,3 @@ $(document).ready(function() {
 
     console.log(Demograf.regionInfo);
 });
-
-$('.navmenu').offcanvas({autohide:'false'});

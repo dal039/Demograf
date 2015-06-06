@@ -146,7 +146,7 @@
     <div class="container-fluid" id="nav">
         <a href="/" id="logo" class="btn btn-link " role="button">DEMOGRAF</a>
     </div>
-    <a id="simple-menu" href="#side_menu">Toggle menu</a>
+    <a id="simple-menu" href="#side_menu">X</a>
     <div id="side_menu">
     </div>
     <!-- js libs -->
@@ -161,7 +161,10 @@
     <script src="js/demograf.js"></script>
     <script>
     $(document).ready(function() {
-        $('#simple-menu').sidr();
+        $('#simple-menu').sidr({
+            name: 'side_menu',
+            side: 'right'
+        });
     });
     </script>
 </body>
