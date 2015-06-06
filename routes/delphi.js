@@ -151,7 +151,9 @@ exports.getPopulationByAge = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_county_popul_by_age_2012_norm';
+        var query = 'SELECT "Area", "Age", "Population" ' + 
+                    'FROM hhsa_san_diego_demographics_county_popul_by_age_2012_norm';
+
         client.query(query, function(err, result) {
             if (err) return console.log(err);
 
@@ -161,7 +163,26 @@ exports.getPopulationByAge = function(req, res) {
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
-            res.end(JSON.stringify(result.rows));
+
+            var filteredResults = [];
+            for(var i = 1; i < result.rows.length; i+=7) {
+                var areaObj = {'Area': result.rows[i].Area};
+
+                var largestPop = 0;
+                var largestAge = "";
+                for(var j = 0; j < 6; ++j) {
+                    // check if new race population is largest
+                    if(result.rows[i+j].Population > largestPop) {
+                        largestPop = result.rows[i+j].Population;
+                        largestAge = result.rows[i+j].Age;
+                    }
+                    areaObj['' + result.rows[i+j].Age + ' Population'] = result.rows[i+j].Population; 
+                }
+                areaObj['Largest Age'] = largestAge;
+                filteredResults.push(areaObj);
+            }
+
+            res.end(JSON.stringify(filteredResults));
         });
     });
 };
@@ -182,6 +203,8 @@ exports.getPopulationByGender = function(req, res) {
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
+
+
             res.end(JSON.stringify(result.rows));
         });
     });
@@ -193,14 +216,13 @@ exports.getPopulationByRace = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT MAX("Population") ' + 
-                    'FROM hhsa_san_diego_demographics_county_popul_by_race_2012_norm ' +
-                    'WHERE "Race" = \'White\' ' +
-                    'OR "Race" = \'Hispanic\' ' +
-                    'OR "Race" = \'Black\' ' +
-                    'OR "Race" = \'Asian/Pacific Islander\' ' +
-                    'OR "Race" = \'Other Race/Ethnicity\' '
-                    'GROUP BY "Population"';     
+        var query = 'SELECT "Area", "Race", "Population" ' + 
+                    'FROM hhsa_san_diego_demographics_county_popul_by_race_2012_norm';
+                    //'WHERE "Race" = \'White\' ' +
+                    //'OR "Race" = \'Hispanic\' ' +
+                    //'OR "Race" = \'Black\' ' +
+                    //'OR "Race" = \'Asian/Pacific Islander\' ' +
+                    //'OR "Race" = \'Other Race/Ethnicity\' ';     
         client.query(query, function(err, result) {
             if (err) return console.log(err);            
 
@@ -211,8 +233,25 @@ exports.getPopulationByRace = function(req, res) {
                 'content-type': 'application/json'
             });
 
-            console.log(result.rows);
-            res.end(JSON.stringify(result.rows));
+            var filteredResults = [];
+            for(var i = 1; i < result.rows.length; i+=6) {
+                var areaObj = {'Area': result.rows[i].Area};
+
+                var largestPop = 0;
+                var largestRace = "";
+                for(var j = 0; j < 5; ++j) {
+                    // check if new race population is largest
+                    if(result.rows[i+j].Population > largestPop) {
+                        largestPop = result.rows[i+j].Population;
+                        largestRace = result.rows[i+j].Race;
+                    }
+                    areaObj['' + result.rows[i+j].Race + ' Population'] = result.rows[i+j].Population; 
+                }
+                areaObj['Largest Race'] = largestRace;
+                filteredResults.push(areaObj);
+            }
+
+            res.end(JSON.stringify(filteredResults));        
         });
     });
 };
