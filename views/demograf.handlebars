@@ -142,9 +142,6 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" id="nav">
-        <a href="/" id="logo" class="btn btn-link " role="button">DEMOGRAF</a>
-    </div>
     <a id="simple-menu" href="#sidr">Toggle menu</a>
     <div id="sidr">
         <!-- Your content -->
@@ -153,6 +150,9 @@
             <li class="active"><a href="#">List 2</a></li>
             <li><a href="#">List 3</a></li>
         </ul>
+    </div>
+    <div class="container-fluid" id="nav">
+        <a href="/" id="logo" class="btn btn-link " role="button">DEMOGRAF</a>
     </div>
     <!-- js libs -->
     <script src="js/jquery.min.js"></script>
@@ -166,7 +166,9 @@
     <script src="js/demograf.js"></script>
     <script>
     $(document).ready(function() {
-        $('#simple-menu').sidr();
+        $('#simple-menu').sidr({
+            side: 'right'
+        });
     });
     </script>
 </body>
