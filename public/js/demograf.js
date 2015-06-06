@@ -2,7 +2,7 @@
  ********************************** HELPER FUNCTIONS **************************************
  *****************************************************************************************/
 var infoSlide = function(theArea) {
-    ($('#side_menu').html('  <a href="#" class="btn btn-link" onclick="$.sidr("close", "side_menu");"><i class="fa fa-times"></i></a><p>' + theArea + '</p>'));
+    ($('#side_menu').html('<div id="inside_menu"><a href="#" class="btn btn-link" onclick="$.sidr(" close ", "side_menu ");"><i class="fa fa-times"></i></a><p id="inside_menu">' + theArea + '</p></div>'));
     $.sidr('open', 'side_menu');
 }
 
@@ -484,9 +484,13 @@ $(document).ready(function() {
     $("html").on("click", function(event) {
         if ($(event.target).attr('class') != 'datamaps-subunit undefined') {
             if ($(event.target).attr('class') != 'sidr right') {
-                $.sidr('close', 'side_menu');
+                if ($(event.target).attr('id') != 'inside_menu') {
+                    $.sidr('close', 'side_menu');
+                }
             }
         }
+
+
     });
     console.log(Demograf.regionInfo);
 });
