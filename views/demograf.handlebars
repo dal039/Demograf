@@ -11,23 +11,16 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jasny-bootstrap.css">
     <link rel="stylesheet" href="css/paper.min.css">
     <link rel="stylesheet" href="css/d3-tip.css">
     <link rel="stylesheet" href="css/ion.rangeSlider.css">
     <link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css">
+    <link rel="stylesheet" href="css/jquery.sidr.dark.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body>
-    <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-right offcanvas" role="navigation">
-    </nav>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body">
-            Menu
-        </button>
-    </div>
-    <!--FILTERS AND -->
+    <!--FILTERS AND MAP -->
     <div class="container-fluid" id="form">
         <h3>Filters
         </h3>
@@ -149,8 +142,12 @@
             </div>
         </div>
     </div>
+    <!--HEADER -->
     <div class="container-fluid" id="nav">
         <a href="/" id="logo" class="btn btn-link " role="button">DEMOGRAF</a>
+    </div>
+    <a id="simple-menu" href="#side_menu">Toggle menu</a>
+    <div id="side_menu">
     </div>
     <!-- js libs -->
     <script src="js/jquery.min.js"></script>
@@ -160,9 +157,13 @@
     <script src="js/topojson.min.js"></script>
     <script src="js/datamaps.none.min.js"></script>
     <script src="js/ion.rangeSlider.min.js"></script>
-    <script src="js/jasny-bootstrap.min.js"></script>
-    <script src="js/offcanvas.js"></script>
+    <script src="js/jquery.sidr.min.js"></script>
     <script src="js/demograf.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#simple-menu').sidr();
+    });
+    </script>
 </body>
 
 </html>

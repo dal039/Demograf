@@ -2,10 +2,7 @@
 ********************************** HELPER FUNCTIONS **************************************
 *****************************************************************************************/
 var infoSlide = function(theArea) {
-    ($('#myNavmenu').html('<p>'+ theArea + '</p>'));
-    //Shift DOES NOT WORK
-    $('.navmenu').offcanvas('toggle');
-
+    ($('#sidr').html('<p>'+ theArea + '</p>'));
 }
 
 
@@ -389,3 +386,5 @@ $(document).ready(function() {
 
     //console.log(Demograf.regionInfo);
 });
+
+$('.navmenu').offcanvas({autohide:'false'});
