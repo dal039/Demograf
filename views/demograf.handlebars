@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/d3-tip.css">
     <link rel="stylesheet" href="css/ion.rangeSlider.css">
     <link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css">
+    <link rel="stylesheet" href="css/jquery.sidr.dark.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
 
@@ -143,6 +144,15 @@
             </div>
         </div>
     </div>
+    <a id="simple-menu" href="#sidr">Toggle menu</a>
+    <div id="sidr">
+        <!-- Your content -->
+        <ul>
+            <li><a href="#">List 1</a></li>
+            <li class="active"><a href="#">List 2</a></li>
+            <li><a href="#">List 3</a></li>
+        </ul>
+    </div>
     <div class="container-fluid" id="nav">
         <a href="/" id="logo" class="btn btn-link " role="button">DEMOGRAF</a>
     </div>
@@ -154,7 +164,15 @@
     <script src="js/topojson.min.js"></script>
     <script src="js/datamaps.none.min.js"></script>
     <script src="js/ion.rangeSlider.min.js"></script>
+    <script src="js/jquery.sidr.min.js"></script>
     <script src="js/demograf.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#simple-menu').sidr({
+            side: 'right'
+        });
+    });
+    </script>
 </body>
 
 </html>
