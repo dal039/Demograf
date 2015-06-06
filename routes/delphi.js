@@ -204,8 +204,26 @@ exports.getPopulationByGender = function(req, res) {
                 'content-type': 'application/json'
             });
 
+            var filteredResults = [];
+            for(var i = 1; i < result.rows.length; i+=3) {
+                var areaObj = {'Area': result.rows[i].Area};
 
-            res.end(JSON.stringify(result.rows));
+                var largestPop = 0;
+                var largestGender = "";
+                for(var j = 0; j < 2; ++j) {
+                    // check if new race population is largest
+                    if(result.rows[i+j].Population > largestPop) {
+                        largestPop = result.rows[i+j].Population;
+                        largestGender = result.rows[i+j].Gender;
+                    }
+                    areaObj['' + result.rows[i+j].Gender + ' Population'] = result.rows[i+j].Population; 
+                }
+                areaObj['Largest Gender'] = largestGender;
+                filteredResults.push(areaObj);
+            }
+
+            console.log(filteredResults);
+            res.end(JSON.stringify(filteredResults));        
         });
     });
 };
@@ -218,11 +236,7 @@ exports.getPopulationByRace = function(req, res) {
 
         var query = 'SELECT "Area", "Race", "Population" ' + 
                     'FROM hhsa_san_diego_demographics_county_popul_by_race_2012_norm';
-                    //'WHERE "Race" = \'White\' ' +
-                    //'OR "Race" = \'Hispanic\' ' +
-                    //'OR "Race" = \'Black\' ' +
-                    //'OR "Race" = \'Asian/Pacific Islander\' ' +
-                    //'OR "Race" = \'Other Race/Ethnicity\' ';     
+    
         client.query(query, function(err, result) {
             if (err) return console.log(err);            
 
