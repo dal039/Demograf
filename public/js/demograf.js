@@ -3,6 +3,9 @@
 *****************************************************************************************/
 var infoSlide = function(theArea) {
     ($('#myNavmenu').html('<p>'+ theArea + '</p>'));
+    //Shift DOES NOT WORK
+    $('.navmenu').offcanvas('toggle');
+
 }
 
 
