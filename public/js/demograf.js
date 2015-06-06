@@ -424,5 +424,11 @@ $(document).ready(function() {
         name: 'side_menu',
         side: 'right'
     });
+    $("html").on("click", function(e) {
+        console.log("CLASS: " + $(event.target).attr('class'));
+        if (!($(event.target).hasClass('datamaps-subunit'))) {
+            $.sidr('close', 'side_menu');
+        }
+    });
     console.log(Demograf.regionInfo);
 });
