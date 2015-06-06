@@ -10,22 +10,23 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="css/jquery.sidr.dark.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/paper.min.css">
     <link rel="stylesheet" href="css/d3-tip.css">
     <link rel="stylesheet" href="css/ion.rangeSlider.css">
     <link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css">
-    <link rel="stylesheet" href="css/jquery.sidr.dark.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body>
-    <!--FILTERS AND MAP -->
+    <!--FILTERS AND MAP-->
     <div class="container-fluid" id="form">
         <h3>Filters
         </h3>
         <div class="row">
             <div class="col-md-4">
+                <!--SLIDERS-->
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a data-toggle="tab" href="#tab1">Economic</a></li>
                     <li><a data-toggle="tab" href="#tab2">Housing</a></li>
@@ -138,18 +139,20 @@
                 </div>
             </div>
             <div class="col-md-8">
+                <!--MAP-->
+                <a id="simple-menu" href="#side_menu">X</a>
                 <div id="map"></div>
             </div>
         </div>
     </div>
-    <!--HEADER -->
+    <!--NAVBAR-->
     <div class="container-fluid" id="nav">
         <a href="/" id="logo" class="btn btn-link " role="button">DEMOGRAF</a>
     </div>
-    <a id="simple-menu" href="#side_menu">X</a>
+    <!--SLIDE OUT MENU-->
     <div id="side_menu">
     </div>
-    <!-- js libs -->
+    <!--JS LIBRARIES-->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.min.js"></script>
@@ -159,14 +162,6 @@
     <script src="js/ion.rangeSlider.min.js"></script>
     <script src="js/jquery.sidr.min.js"></script>
     <script src="js/demograf.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#simple-menu').sidr({
-            name: 'side_menu',
-            side: 'right'
-        });
-    });
-    </script>
 </body>
 
 </html>

@@ -104,3 +104,18 @@ body {
 body {
     padding-top: 50px;
 }
+
+.sidr {
+    background: #212121;
+    width: 460px;
+}
+
+.sidr.right {
+    left: auto;
+    right: -460px
+}
+
+.sidr.left {
+    left: -460px;
+    right: auto
+}

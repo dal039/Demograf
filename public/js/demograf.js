@@ -1,15 +1,14 @@
 /*****************************************************************************************
-********************************** HELPER FUNCTIONS **************************************
-*****************************************************************************************/
+ ********************************** HELPER FUNCTIONS **************************************
+ *****************************************************************************************/
 var infoSlide = function(theArea) {
-    ($('#side_menu').html('<p>'+ theArea + '</p>'));
-         $.sidr('open', 'side_menu');
-
+    ($('#side_menu').html('<p>' + theArea + '</p>'));
+    $.sidr('open', 'side_menu');
 }
 
 /*****************************************************************************************
-*************************************** SLIDERS ******************************************
-*****************************************************************************************/
+ *************************************** SLIDERS ******************************************
+ *****************************************************************************************/
 
 //Monthly Income
 $(function() {
@@ -177,8 +176,8 @@ $(function() {
 
 
 /*****************************************************************************************
-************************************ D3/GEOJSON MAP **************************************
-*****************************************************************************************/
+ ************************************ D3/GEOJSON MAP **************************************
+ *****************************************************************************************/
 
 
 var Demograf = Demograf || (function() {
@@ -190,59 +189,59 @@ var Demograf = Demograf || (function() {
 
 
     self.getDelphiData = function() {
-        
+
         // regions info
-        self.regionInfo = { 
-            "Carlsbad" : {},
-            "Oceanside" : {},
-            "Pendleton" : {},
-            "San Dieguito" : {},
-            "Vista" : {},
-            "Coastal" : {},
-            "Del Mar-Mira Mesa" : {},
-            "Elliott-Navajo" : {},
-            "Kearny Mesa" : {},
-            "Miramar" : {},
-            "Peninsula" : {},
-            "University" : {},
-            "Central San Diego" : {},
-            "Mid City" : {},
-            "Southeastern San Diego" : {},
-            "Chula Vista" : {},
-            "Coronado" : {},
-            "National City" : {},
-            "South Bay" : {},
-            "Sweetwater" : {},
-            "Alpine" : {},
-            "El Cajon" : {},
-            "Harbison-Crest" : {},
-            "Jamul" : {},
-            "La Mesa" : {},
-            "Laguna-Pine Valley" : {},
-            "Lakeside" : {},
-            "Lemon Grove" : {},
-            "Mountain Empire" : {},
-            "Santee" : {},
-            "Spring Valley" : {},
-            "Anza-Borrego" : {},
-            "Escondido" : {},
-            "Fallbrook" : {},
-            "North San Diego" : {},
-            "Palomar-Julian" : {},
-            "Pauma" : {},
-            "Poway" : {},
-            "Ramona" : {},
-            "San Marcos" : {},
-            "Valley Center" : {}
+        self.regionInfo = {
+            "Carlsbad": {},
+            "Oceanside": {},
+            "Pendleton": {},
+            "San Dieguito": {},
+            "Vista": {},
+            "Coastal": {},
+            "Del Mar-Mira Mesa": {},
+            "Elliott-Navajo": {},
+            "Kearny Mesa": {},
+            "Miramar": {},
+            "Peninsula": {},
+            "University": {},
+            "Central San Diego": {},
+            "Mid City": {},
+            "Southeastern San Diego": {},
+            "Chula Vista": {},
+            "Coronado": {},
+            "National City": {},
+            "South Bay": {},
+            "Sweetwater": {},
+            "Alpine": {},
+            "El Cajon": {},
+            "Harbison-Crest": {},
+            "Jamul": {},
+            "La Mesa": {},
+            "Laguna-Pine Valley": {},
+            "Lakeside": {},
+            "Lemon Grove": {},
+            "Mountain Empire": {},
+            "Santee": {},
+            "Spring Valley": {},
+            "Anza-Borrego": {},
+            "Escondido": {},
+            "Fallbrook": {},
+            "North San Diego": {},
+            "Palomar-Julian": {},
+            "Pauma": {},
+            "Poway": {},
+            "Ramona": {},
+            "San Marcos": {},
+            "Valley Center": {}
         };
 
         $.getJSON("/delphi_home_value", function(data) {
-            for(var i = 0; i < data.length; ++i) {
-                for ( var key in self.regionInfo) {
-                    if( self.regionInfo.hasOwnProperty(key) ) {
-                        
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
                         // if current data Area matches current Region area
-                        if(key == data[i].Area) {
+                        if (key == data[i].Area) {
                             (self.regionInfo[key])['Median House Value'] = (data[i])['Median house value'];
                             break;
                         }
@@ -252,12 +251,12 @@ var Demograf = Demograf || (function() {
         });
 
         $.getJSON("/delphi_housing_cost", function(data) {
-            for(var i = 0; i < data.length; ++i) {
-                for ( var key in self.regionInfo) {
-                    if( self.regionInfo.hasOwnProperty(key) ) {
-                        
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
                         // if current data Area matches current Region area
-                        if(key == data[i].Area) {
+                        if (key == data[i].Area) {
                             delete data[i].Area;
                             (self.regionInfo[key])['Housing Cost'] = (data[i]);
                             break;
@@ -267,13 +266,13 @@ var Demograf = Demograf || (function() {
             }
         });
 
-        $.getJSON("/delphi_median_income", function(data) { 
-            for(var i = 0; i < data.length; ++i) {
-                for ( var key in self.regionInfo) {
-                    if( self.regionInfo.hasOwnProperty(key) ) {
-                        
+        $.getJSON("/delphi_median_income", function(data) {
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
                         // if current data Area matches current Region area
-                        if(key == data[i].Area) {
+                        if (key == data[i].Area) {
                             (self.regionInfo[key])['Median Income'] = (data[i])['Median Household Income'];
                             break;
                         }
@@ -281,7 +280,7 @@ var Demograf = Demograf || (function() {
                 }
             }
         });
-        
+
         /*$.getJSON("/delphi_employment_status", function(data) {
             console.log(data);
         });
@@ -292,48 +291,48 @@ var Demograf = Demograf || (function() {
         
         */
         $.getJSON("/delphi_population_by_age", function(data) {
-            for(var i = 0; i < data.length; ++i) {
-                for ( var key in self.regionInfo) {
-                    if( self.regionInfo.hasOwnProperty(key) ) {
-                        
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
                         // if current data Area matches current Region area
-                        if(key == data[i].Area) {
+                        if (key == data[i].Area) {
                             delete data[i].Area;
                             (self.regionInfo[key])['Age Population'] = (data[i]);
                             break;
-                        }                    
+                        }
                     }
                 }
             }
         });
 
         $.getJSON("/delphi_population_by_gender", function(data) {
-            for(var i = 0; i < data.length; ++i) {
-                for ( var key in self.regionInfo) {
-                    if( self.regionInfo.hasOwnProperty(key) ) {
-                        
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
                         // if current data Area matches current Region area
-                        if(key == data[i].Area) {
+                        if (key == data[i].Area) {
                             delete data[i].Area;
                             (self.regionInfo[key])['Gender Population'] = (data[i]);
                             break;
-                        }                    
+                        }
                     }
                 }
             }
         });
 
         $.getJSON("/delphi_population_by_race", function(data) {
-            for(var i = 0; i < data.length; ++i) {
-                for ( var key in self.regionInfo) {
-                    if( self.regionInfo.hasOwnProperty(key) ) {
-                        
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
                         // if current data Area matches current Region area
-                        if(key == data[i].Area) {
+                        if (key == data[i].Area) {
                             delete data[i].Area;
                             (self.regionInfo[key])['Race Population'] = (data[i]);
                             break;
-                        }                    
+                        }
                     }
                 }
             }
@@ -382,7 +381,7 @@ var Demograf = Demograf || (function() {
                     .scale(27000)
                     .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
                 var path = d3.geo.path().projection(projection);
-                
+
                 return {
                     path: path,
                     projection: projection
@@ -411,8 +410,8 @@ var Demograf = Demograf || (function() {
 
 
 /*****************************************************************************************
-************************************* ENTRY POINT ****************************************
-*****************************************************************************************/
+ ************************************* ENTRY POINT ****************************************
+ *****************************************************************************************/
 
 $(document).ready(function() {
 
@@ -421,6 +420,9 @@ $(document).ready(function() {
     $(window).on('resize', function() {
         Demograf.map.resize();
     });
-
+    $('#simple-menu').sidr({
+        name: 'side_menu',
+        side: 'right'
+    });
     console.log(Demograf.regionInfo);
 });
