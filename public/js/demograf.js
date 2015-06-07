@@ -2,7 +2,21 @@
  ********************************** HELPER FUNCTIONS **************************************
  *****************************************************************************************/
 var infoSlide = function(theArea) {
-    ($('#inside_side_menu').html('<p>' + theArea + '</p>'));
+    var theArea = theArea;
+    for (var key in Demograf.regionInfo) {
+        if (Demograf.regionInfo.hasOwnProperty(key)) {
+            if (key == theArea) {
+                var median_income = (Demograf.regionInfo[key])['Median Income'];
+                break;
+            }
+        }
+    }
+
+    ($('#inside_side_menu').html('<h1>' 
+        + theArea 
+        + '</h1>'
+        + 'Median Income'
+        + median_income));
     $.sidr('open', 'side_menu');
 }
 
