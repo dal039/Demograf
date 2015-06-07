@@ -12,9 +12,9 @@ var infoSlide = function(theArea) {
         }
     }
 
-    ($('#inside_side_menu').html('<h1>' 
+    ($('#inside_side_menu').html('<h3>' 
         + theArea 
-        + '</h1>'
+        + '</h3>'
         + 'Median Income'
         + median_income));
     $.sidr('open', 'side_menu');
