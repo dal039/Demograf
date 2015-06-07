@@ -1,22 +1,53 @@
 /*****************************************************************************************
  ********************************** HELPER FUNCTIONS **************************************
  *****************************************************************************************/
+
+/* Grab Data and open side menu */
 var infoSlide = function(theArea) {
     var theArea = theArea;
     for (var key in Demograf.regionInfo) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
             if (key == theArea) {
+                var median_house_value = (Demograf.regionInfo[key])['Median House Value'];
                 var median_income = (Demograf.regionInfo[key])['Median Income'];
+                var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
+                var percentage_educated = (Demograf.regionInfo[key])['Percentage Educated'];
+                var percentage_single = (Demograf.regionInfo[key])['Percentage Single'];
+                var percentage_unemployed = (Demograf.regionInfo[key])['Percentage Unemployed'];
                 break;
             }
         }
     }
 
-    ($('#inside_side_menu').html('<h3>' 
+    ($('#inside_side_menu').html(
+          '<h3>' 
         + theArea 
-        + '</h3>'
-        + 'Median Income'
-        + median_income));
+        + '</h3>' 
+        + '<p>'
+        + 'Median House Value: ' 
+        + median_house_value
+        + '</p>'
+        + '<p>'
+        + 'Median Income: ' 
+        + median_income
+        + '</p>'
+        + '<p>'
+        + 'Percentage Below Poverty: ' 
+        + percentage_below_poverty
+        + '</p>'
+        + '<p>'
+        + 'Percentage Educated: ' 
+        + percentage_educated
+        + '</p>'
+        + '<p>'
+        + 'Percentage Single: ' 
+        + percentage_single
+        + '</p>'
+        + '<p>'
+        + 'Percentage Unemployed: ' 
+        + percentage_unemployed
+        + '</p>'
+        ));
     $.sidr('open', 'side_menu');
 }
 

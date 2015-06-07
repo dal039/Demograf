@@ -11,11 +11,12 @@
     color: white;
 }
 
-#inside_side_menu > h1,
-h2,
-h3,
-h4,
-h5,
-p {
+.sidr h1,
+.sidr h2,
+.sidr h3,
+.sidr h4,
+.sidr h5,
+.sidr h6,
+.sidr p {
     color: white;
 }
