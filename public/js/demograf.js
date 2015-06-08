@@ -479,6 +479,10 @@ var Demograf = Demograf || (function() {
             console.log(data);
         });*/
 
+        //NEED EDUCATION
+
+        //NEED OCUPATION
+
     };
     /* Create Map */
     self.createMap = function() {
