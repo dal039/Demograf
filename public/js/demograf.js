@@ -8,14 +8,46 @@ var infoSlide = function(theArea) {
     for (var key in Demograf.regionInfo) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
             if (key == theArea) {
+                //Age Population
+                var zero_four = ((Demograf.regionInfo[key])['Age Population'])['0-4 Population'];
+                var five_fourteen = ((Demograf.regionInfo[key])['Age Population'])['5-14 Population'];
+                var fifteen_twentyfour = ((Demograf.regionInfo[key])['Age Population'])['15-24 Population'];
+                var twentyfive_fourtyfour = ((Demograf.regionInfo[key])['Age Population'])['25-44 Population'];
+                var fourtyfive_sixtyfour = ((Demograf.regionInfo[key])['Age Population'])['45-64 Population'];
+                var sixtyfive_plus = ((Demograf.regionInfo[key])['Age Population'])['65+ Population'];
+                var largest_age = ((Demograf.regionInfo[key])['Age Population'])['Largest Age'];
+                //Gender Population
+                var female = ((Demograf.regionInfo[key])['Gender Population'])['Female Population'];
+                var male = ((Demograf.regionInfo[key])['Gender Population'])['Male Population'];
+                var largest_gender = ((Demograf.regionInfo[key])['Gender Population'])['Largest Gender'];
+                //Housing Cost
+                var twenty_twentynine = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing 20-29% (Average)'];
+                var greater_thirty = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing  >30% (Average)'];
+                var less_twenty = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing <20% (Average)'];
+                //Median House Value
                 var median_house_value = (Demograf.regionInfo[key])['Median House Value'];
                 var median_house_value = numeral(median_house_value).format('$0,0');
+                //Median Income
                 var median_income = (Demograf.regionInfo[key])['Median Income'];
+                //Percentage Below Poverty
                 var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
                 var percentage_below_poverty = numeral(percentage_below_poverty).format('0.00%');
+                //Percentage Educated
                 var percentage_educated = (Demograf.regionInfo[key])['Percentage Educated'];
+                //Percentage Single
                 var percentage_single = (Demograf.regionInfo[key])['Percentage Single'];
+                //Percentage Unemployed
                 var percentage_unemployed = (Demograf.regionInfo[key])['Percentage Unemployed'];
+                //Public Programs
+                var cash_assistance = ((Demograf.regionInfo[key])['Public Programs'])['Percentage With Cash Assistance'];
+                var snap = ((Demograf.regionInfo[key])['Public Programs'])['Percentage With SNAP'];
+                //Race Population
+                var asian = ((Demograf.regionInfo[key])['Race Population'])['Asian/Pacific Islander Population'];
+                var black = ((Demograf.regionInfo[key])['Race Population'])['Black Population'];
+                var hispanic = ((Demograf.regionInfo[key])['Race Population'])['Hispanic Population'];
+                var white = ((Demograf.regionInfo[key])['Race Population'])['White Population'];
+                var other = ((Demograf.regionInfo[key])['Race Population'])['Other Race/Ethnicity Population'];
+                var largest_race = ((Demograf.regionInfo[key])['Race Population'])['Largest Race'];
                 break;
             }
         }
