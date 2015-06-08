@@ -3,9 +3,13 @@
  *****************************************************************************************/
 /* Grab Data and open side menu */
 var open_side_menu = function(theArea) {
+    //Array to hold all median incomes
+    var all_median_incomes = [];
     //Loop through object and add data to variables
     for (var key in Demograf.regionInfo) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
+            //add to all median incomes array
+            all_median_incomes.push((Demograf.regionInfo[key])['Median House Value']);
             if (key == theArea) {
                 //Age Population
                 //Get Vars
@@ -23,18 +27,21 @@ var open_side_menu = function(theArea) {
                 fifteen_twentyfour = numeral(fifteen_twentyfour / total_age * 100).format('0.00');
                 twentyfive_fourtyfour = numeral(twentyfive_fourtyfour / total_age * 100).format('0.00');
                 fourtyfive_sixtyfour = numeral(fourtyfive_sixtyfour / total_age * 100).format('0.00');
-                sixtyfive_plus = numeral(sixtyfive_plus / total_age * 100).format('0.00');
-*/
+                sixtyfive_plus = numeral(sixtyfive_plus / total_age * 100).format('0.00');*/
+
                 //Gender Population
                 var female = ((Demograf.regionInfo[key])['Gender Population'])['Female Population'];
                 var male = ((Demograf.regionInfo[key])['Gender Population'])['Male Population'];
                 var largest_gender = ((Demograf.regionInfo[key])['Gender Population'])['Largest Gender'];
-                console.log(female);
-                console.log(male);
+
                 //Housing Cost
                 var twenty_twentynine = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing 20-29% (Average)'];
                 var greater_thirty = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing  >30% (Average)'];
                 var less_twenty = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing <20% (Average)'];
+                //Get rid of percentages
+                twenty_twentynine = numeral().unformat(twenty_twentynine);
+                greater_thirty = numeral().unformat(greater_thirty);
+                less_twenty = numeral().unformat(less_twenty);
 
                 //Median House Value
                 var median_house_value = (Demograf.regionInfo[key])['Median House Value'];
@@ -45,8 +52,10 @@ var open_side_menu = function(theArea) {
 
                 //Percentage Below Poverty
                 var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
-                var percentage_below_poverty = numeral(percentage_below_poverty).format('0.00%');
-
+                //var percentage_below_poverty = numeral(percentage_below_poverty).format('0.00%');
+                percentage_below_poverty = percentage_below_poverty * 100;
+                var percentage_above_poverty = 1 - percentage_below_poverty;
+                //console.log(percentage_below_poverty);
                 //Percentage Educated
                 var percentage_educated = (Demograf.regionInfo[key])['Percentage Educated'];
 
@@ -71,15 +80,21 @@ var open_side_menu = function(theArea) {
             }
         }
     }
+    all_median_incomes.sort();
 
-    //Add HTML to Side Menu
-    ($('#inside_side_menu').html(
-        '<h3>' + theArea + '</h3>' + '<p>' + 'Median House Value: ' + median_house_value + '</p>' + '<p>' + 'Median Income: ' + median_income + '</p>' + '<p>' + 'Percentage Below Poverty: ' + percentage_below_poverty + '</p>' + '<p>' + 'Percentage Educated: ' + percentage_educated + '</p>' + '<p>' + 'Percentage Single: ' + percentage_single + '</p>' + '<p>' + 'Percentage Unemployed: ' + percentage_unemployed + '</p>'
-    ));
+    /*
+        //Add HTML to Side Menu
+        ($('#inside_side_menu').html(
+           '</p>' + '<p>' + 'Median Income: ' + median_income + '</p>' + '<p>' + 'Percentage Below Poverty: ' + percentage_below_poverty + '</p>' + '<p>' + 'Percentage Educated: ' + percentage_educated + '</p>' + '<p>' + 'Percentage Single: ' + percentage_single + '</p>' + '<p>' + 'Percentage Unemployed: ' + percentage_unemployed + '</p>'
+        ));
+    */
+
+    //Area Name
+    ($('#area_name').html('<h3>' + theArea + '</h3>'));
 
     //Age Graph
     var age_chart = c3.generate({
-  bindto: '#age_chart',
+        bindto: '#age_chart',
         donut: {
             title: "Age Breakdown"
         },
@@ -110,6 +125,58 @@ var open_side_menu = function(theArea) {
             ]
         }
     });
+
+    //Housing Cost Chart
+    var housingcost_chart = c3.generate({
+        bindto: '#housingcost_chart',
+        donut: {
+            title: "Percent of Household Income on Housing"
+        },
+        data: {
+            type: 'donut',
+            columns: [
+                ['20%-29%', twenty_twentynine],
+                ['>30%', greater_thirty],
+                ['<20%', less_twenty]
+            ]
+        }
+    });
+
+    //Median House Value
+    //($('#median_house_value').html('<p>' + 'Median House Value: ' + median_house_value));
+    //Median House Vale Chart
+    var median_house_value_chart = c3.generate({
+        bindto: '#median_house_value_chart',
+        data: {
+            columns: [
+                all_median_incomes
+            ],
+            type: 'bar'
+        },
+        bar: {
+            width: {
+                ratio: 0.5 // this makes bar width 50% of length between ticks
+            },
+            // or
+            //width: 100 // this makes bar width 100px
+        }
+    });
+
+    //Median Income
+
+    //Percentage Below Poverty
+    var poverty_chart = c3.generate({
+        bindto: '#poverty_chart',
+        data: {
+            columns: [
+                ['Below Poverty', percentage_below_poverty]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
 
     //Open Side Menu
     $.sidr('open', 'side_menu');
