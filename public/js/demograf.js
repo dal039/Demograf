@@ -576,10 +576,12 @@ $(document).ready(function() {
 
     //Closes Side Menu
     $("html").on("click", function(event) {
-        if (!$(event.target).closest(".datamaps-subunit").length) {
-            if ($(event.target).attr('class') != 'sidr right') {
-                if (!$(event.target).closest(".inside_side_menu").length) {
-                    $.sidr('close', 'side_menu');
+        if (!$(event.target).closest(".side_menu_top").length) {
+            if (!$(event.target).closest(".datamaps-subunit").length) {
+                if ($(event.target).attr('class') != 'sidr right') {
+                    if (!$(event.target).closest(".inside_side_menu").length) {
+                        $.sidr('close', 'side_menu');
+                    }
                 }
             }
         }

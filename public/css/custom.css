@@ -57,7 +57,7 @@ body {
 
 .sidr {
     width: 460px;
-    background: #212121;
+    background: white;
 }
 
 .sidr.right {
@@ -68,4 +68,8 @@ body {
 .sidr.left {
     right: auto;
     left: -460px;
+}
+
+#side_menu_top {
+    background-color: #212121;
 }

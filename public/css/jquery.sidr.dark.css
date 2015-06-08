@@ -8,17 +8,6 @@
     overflow-y: auto;
     width: 260px;
     height: 100%;
-    color: white;
-}
-
-.sidr h1,
-.sidr h2,
-.sidr h3,
-.sidr h4,
-.sidr h5,
-.sidr h6,
-.sidr p {
-    color: white;
 }
 
 .sidr p {
