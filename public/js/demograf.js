@@ -9,8 +9,10 @@ var infoSlide = function(theArea) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
             if (key == theArea) {
                 var median_house_value = (Demograf.regionInfo[key])['Median House Value'];
+                var median_house_value = numeral(median_house_value).format('$0,0');
                 var median_income = (Demograf.regionInfo[key])['Median Income'];
                 var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
+                var percentage_below_poverty = numeral(percentage_below_poverty).format('0.00%');
                 var percentage_educated = (Demograf.regionInfo[key])['Percentage Educated'];
                 var percentage_single = (Demograf.regionInfo[key])['Percentage Single'];
                 var percentage_unemployed = (Demograf.regionInfo[key])['Percentage Unemployed'];
@@ -20,34 +22,8 @@ var infoSlide = function(theArea) {
     }
 
     ($('#inside_side_menu').html(
-          '<h3>' 
-        + theArea 
-        + '</h3>' 
-        + '<p>'
-        + 'Median House Value: ' 
-        + median_house_value
-        + '</p>'
-        + '<p>'
-        + 'Median Income: ' 
-        + median_income
-        + '</p>'
-        + '<p>'
-        + 'Percentage Below Poverty: ' 
-        + percentage_below_poverty
-        + '</p>'
-        + '<p>'
-        + 'Percentage Educated: ' 
-        + percentage_educated
-        + '</p>'
-        + '<p>'
-        + 'Percentage Single: ' 
-        + percentage_single
-        + '</p>'
-        + '<p>'
-        + 'Percentage Unemployed: ' 
-        + percentage_unemployed
-        + '</p>'
-        ));
+        '<h3>' + theArea + '</h3>' + '<p>' + 'Median House Value: ' + median_house_value + '</p>' + '<p>' + 'Median Income: ' + median_income + '</p>' + '<p>' + 'Percentage Below Poverty: ' + percentage_below_poverty + '</p>' + '<p>' + 'Percentage Educated: ' + percentage_educated + '</p>' + '<p>' + 'Percentage Single: ' + percentage_single + '</p>' + '<p>' + 'Percentage Unemployed: ' + percentage_unemployed + '</p>'
+    ));
     $.sidr('open', 'side_menu');
 }
 

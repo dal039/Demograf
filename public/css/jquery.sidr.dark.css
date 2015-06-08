@@ -20,3 +20,7 @@
 .sidr p {
     color: white;
 }
+
+.sidr p {
+    font-weight: 300;
+}
