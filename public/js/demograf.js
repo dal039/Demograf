@@ -12,7 +12,6 @@ var open_side_menu = function(theArea) {
             all_median_incomes.push((Demograf.regionInfo[key])['Median House Value']);
             if (key == theArea) {
                 //Age Population
-                //Get Vars
                 var zero_four = ((Demograf.regionInfo[key])['Age Population'])['0-4 Population'];
                 var five_fourteen = ((Demograf.regionInfo[key])['Age Population'])['5-14 Population'];
                 var fifteen_twentyfour = ((Demograf.regionInfo[key])['Age Population'])['15-24 Population'];
@@ -20,14 +19,6 @@ var open_side_menu = function(theArea) {
                 var fourtyfive_sixtyfour = ((Demograf.regionInfo[key])['Age Population'])['45-64  Population'];
                 var sixtyfive_plus = ((Demograf.regionInfo[key])['Age Population'])['65+ Population'];
                 var largest_age = ((Demograf.regionInfo[key])['Age Population'])['Largest Age'];
-                /* //Compute Percentages
-                var total_age = (zero_four + five_fourteen + fifteen_twentyfour + twentyfive_fourtyfour + fourtyfive_sixtyfour + sixtyfive_plus);
-                zero_four = numeral(zero_four / total_age * 100).format('0.00');
-                five_fourteen = numeral(five_fourteen / total_age * 100).format('0.00');
-                fifteen_twentyfour = numeral(fifteen_twentyfour / total_age * 100).format('0.00');
-                twentyfive_fourtyfour = numeral(twentyfive_fourtyfour / total_age * 100).format('0.00');
-                fourtyfive_sixtyfour = numeral(fourtyfive_sixtyfour / total_age * 100).format('0.00');
-                sixtyfive_plus = numeral(sixtyfive_plus / total_age * 100).format('0.00');*/
 
                 //Gender Population
                 var female = ((Demograf.regionInfo[key])['Gender Population'])['Female Population'];
@@ -52,22 +43,27 @@ var open_side_menu = function(theArea) {
 
                 //Percentage Below Poverty
                 var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
-                //var percentage_below_poverty = numeral(percentage_below_poverty).format('0.00%');
-                percentage_below_poverty = percentage_below_poverty * 100;
-                var percentage_above_poverty = 1 - percentage_below_poverty;
-                //console.log(percentage_below_poverty);
+                percentage_below_poverty = numeral(percentage_below_poverty * 100).format('0.00');
+
                 //Percentage Educated
                 var percentage_educated = (Demograf.regionInfo[key])['Percentage Educated'];
+                percentage_educated = numeral(percentage_educated * 100).format('0.00');
 
                 //Percentage Single
                 var percentage_single = (Demograf.regionInfo[key])['Percentage Single'];
+                percentage_single = numeral(percentage_single * 100).format('0.00');
 
                 //Percentage Unemployed
                 var percentage_unemployed = (Demograf.regionInfo[key])['Percentage Unemployed'];
+                percentage_unemployed = numeral(percentage_unemployed * 100).format('0.00');
 
-                //Public Programs
+                //Cash Assistance
                 var cash_assistance = ((Demograf.regionInfo[key])['Public Programs'])['Percentage With Cash Assistance'];
+                cash_assistance = numeral(cash_assistance * 100).format('0.00');
+
+                //SNAP
                 var snap = ((Demograf.regionInfo[key])['Public Programs'])['Percentage With SNAP'];
+                snap = numeral(snap * 100).format('0.00');
 
                 //Race Population
                 var asian = ((Demograf.regionInfo[key])['Race Population'])['Asian/Pacific Islander Population'];
@@ -81,13 +77,6 @@ var open_side_menu = function(theArea) {
         }
     }
     all_median_incomes.sort();
-
-    /*
-        //Add HTML to Side Menu
-        ($('#inside_side_menu').html(
-           '</p>' + '<p>' + 'Median Income: ' + median_income + '</p>' + '<p>' + 'Percentage Below Poverty: ' + percentage_below_poverty + '</p>' + '<p>' + 'Percentage Educated: ' + percentage_educated + '</p>' + '<p>' + 'Percentage Single: ' + percentage_single + '</p>' + '<p>' + 'Percentage Unemployed: ' + percentage_unemployed + '</p>'
-        ));
-    */
 
     //Area Name
     ($('#area_name').html('<h3>' + theArea + '</h3>'));
@@ -142,8 +131,6 @@ var open_side_menu = function(theArea) {
         }
     });
 
-    //Median House Value
-    //($('#median_house_value').html('<p>' + 'Median House Value: ' + median_house_value));
     //Median House Vale Chart
     var median_house_value_chart = c3.generate({
         bindto: '#median_house_value_chart',
@@ -177,6 +164,88 @@ var open_side_menu = function(theArea) {
         gauge: {}
     });
 
+    //Percentage Educated
+    var educated_chart = c3.generate({
+        bindto: '#educated_chart',
+        data: {
+            columns: [
+                ['Population 25+ with Bachelor\'s Degree', percentage_educated]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
+    //Percentage Single
+    var single_chart = c3.generate({
+        bindto: '#single_chart',
+        data: {
+            columns: [
+                ['Population 15+ Single', percentage_single]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
+    //Percentage unemployed
+    var unemployed_chart = c3.generate({
+        bindto: '#unemployed_chart',
+        data: {
+            columns: [
+                ['Unemployed', percentage_unemployed]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
+    //Percentage cash assistance
+    var cash_chart = c3.generate({
+        bindto: '#cash_chart',
+        data: {
+            columns: [
+                ['Households With Cash Assistance', cash_assistance]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
+    //Percentage snap
+    var snap_chart = c3.generate({
+        bindto: '#snap_chart',
+        data: {
+            columns: [
+                ['Households With SNAP', snap]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
+    //Race
+    var race_chart = c3.generate({
+        bindto: '#race_chart',
+        donut: {
+            title: "Race Breakdown"
+        },
+        data: {
+            type: 'donut',
+            columns: [
+                ['Asian/Pacific Islander', asian],
+                ['Black', black],
+                ['Hispanic', hispanic],
+                ['White', white],
+                ['Other', other]
+            ]
+        }
+    });
 
     //Open Side Menu
     $.sidr('open', 'side_menu');
