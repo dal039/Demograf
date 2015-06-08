@@ -245,60 +245,56 @@ $(function() {
  ************************************ D3/GEOJSON MAP **************************************
  *****************************************************************************************/
 
-
 var Demograf = Demograf || (function() {
     var self = {};
     /** 
      * Send an ajax request to the server to retrieve delphi db data.
      */
 
-
-
     self.getDelphiData = function() {
-
         // regions info
         self.regionInfo = {
-            "Carlsbad": {},
-            "Oceanside": {},
-            "Pendleton": {},
-            "San Dieguito": {},
-            "Vista": {},
-            "Coastal": {},
-            "Del Mar-Mira Mesa": {},
-            "Elliott-Navajo": {},
-            "Kearny Mesa": {},
-            "Miramar": {},
-            "Peninsula": {},
-            "University": {},
-            "Central San Diego": {},
-            "Mid City": {},
-            "Southeastern San Diego": {},
-            "Chula Vista": {},
-            "Coronado": {},
-            "National City": {},
-            "South Bay": {},
-            "Sweetwater": {},
             "Alpine": {},
+            "Anza-Borrego": {},
+            "Carlsbad": {},
+            "Central San Diego": {},
+            "Chula Vista": {},
+            "Coastal": {},
+            "Coronado": {},
+            "Del Mar-Mira Mesa": {},
             "El Cajon": {},
+            "Elliott-Navajo": {},
+            "Escondido": {},
+            "Fallbrook": {},
             "Harbison-Crest": {},
             "Jamul": {},
+            "Kearny Mesa": {},
             "La Mesa": {},
             "Laguna-Pine Valley": {},
             "Lakeside": {},
             "Lemon Grove": {},
+            "Mid City": {},
+            "Miramar": {},
             "Mountain Empire": {},
-            "Santee": {},
-            "Spring Valley": {},
-            "Anza-Borrego": {},
-            "Escondido": {},
-            "Fallbrook": {},
+            "National City": {},
             "North San Diego": {},
+            "Oceanside": {},
             "Palomar-Julian": {},
             "Pauma": {},
+            "Pendleton": {},
+            "Peninsula": {},
             "Poway": {},
             "Ramona": {},
+            "San Dieguito": {},
             "San Marcos": {},
-            "Valley Center": {}
+            "Santee": {},
+            "South Bay": {},
+            "Southeastern San Diego": {},
+            "Spring Valley": {},
+            "Sweetwater": {},
+            "University": {},
+            "Valley Center": {},
+            "Vista": {}
         };
 
         $.getJSON("/delphi_home_value", function(data) {
@@ -484,7 +480,7 @@ var Demograf = Demograf || (function() {
         });*/
 
     };
-
+    /* Create Map */
     self.createMap = function() {
         self.map = new Datamap({
             element: document.getElementById('map'),
@@ -536,15 +532,18 @@ var Demograf = Demograf || (function() {
 
 $(document).ready(function() {
     Demograf.init();
+
     //Resizes Map
     $(window).on('resize', function() {
         Demograf.map.resize();
     });
+
     //Creates Side Menu
     $('#simple-menu').sidr({
         name: 'side_menu',
         side: 'right'
     });
+
     //Closes Side Menu
     $("html").on("click", function(event) {
         if (!$(event.target).closest(".datamaps-subunit").length) {
