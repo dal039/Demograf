@@ -8,14 +8,23 @@ var open_side_menu = function(theArea) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
             if (key == theArea) {
                 //Age Population
+                //Get Vars
                 var zero_four = ((Demograf.regionInfo[key])['Age Population'])['0-4 Population'];
                 var five_fourteen = ((Demograf.regionInfo[key])['Age Population'])['5-14 Population'];
                 var fifteen_twentyfour = ((Demograf.regionInfo[key])['Age Population'])['15-24 Population'];
                 var twentyfive_fourtyfour = ((Demograf.regionInfo[key])['Age Population'])['25-44 Population'];
-                var fourtyfive_sixtyfour = ((Demograf.regionInfo[key])['Age Population'])['45-64 Population'];
+                var fourtyfive_sixtyfour = ((Demograf.regionInfo[key])['Age Population'])['45-64  Population'];
                 var sixtyfive_plus = ((Demograf.regionInfo[key])['Age Population'])['65+ Population'];
                 var largest_age = ((Demograf.regionInfo[key])['Age Population'])['Largest Age'];
-
+                /* //Compute Percentages
+                var total_age = (zero_four + five_fourteen + fifteen_twentyfour + twentyfive_fourtyfour + fourtyfive_sixtyfour + sixtyfive_plus);
+                zero_four = numeral(zero_four / total_age * 100).format('0.00');
+                five_fourteen = numeral(five_fourteen / total_age * 100).format('0.00');
+                fifteen_twentyfour = numeral(fifteen_twentyfour / total_age * 100).format('0.00');
+                twentyfive_fourtyfour = numeral(twentyfive_fourtyfour / total_age * 100).format('0.00');
+                fourtyfive_sixtyfour = numeral(fourtyfive_sixtyfour / total_age * 100).format('0.00');
+                sixtyfive_plus = numeral(sixtyfive_plus / total_age * 100).format('0.00');
+*/
                 //Gender Population
                 var female = ((Demograf.regionInfo[key])['Gender Population'])['Female Population'];
                 var male = ((Demograf.regionInfo[key])['Gender Population'])['Male Population'];
@@ -57,7 +66,6 @@ var open_side_menu = function(theArea) {
                 var white = ((Demograf.regionInfo[key])['Race Population'])['White Population'];
                 var other = ((Demograf.regionInfo[key])['Race Population'])['Other Race/Ethnicity Population'];
                 var largest_race = ((Demograf.regionInfo[key])['Race Population'])['Largest Race'];
-                console.log(zero_four);
                 break;
             }
         }
@@ -67,6 +75,24 @@ var open_side_menu = function(theArea) {
     ($('#inside_side_menu').html(
         '<h3>' + theArea + '</h3>' + '<p>' + 'Median House Value: ' + median_house_value + '</p>' + '<p>' + 'Median Income: ' + median_income + '</p>' + '<p>' + 'Percentage Below Poverty: ' + percentage_below_poverty + '</p>' + '<p>' + 'Percentage Educated: ' + percentage_educated + '</p>' + '<p>' + 'Percentage Single: ' + percentage_single + '</p>' + '<p>' + 'Percentage Unemployed: ' + percentage_unemployed + '</p>'
     ));
+
+    //Age Graph
+    var chart = c3.generate({
+        donut: {
+            title: "Ages"
+        },
+        data: {
+            type: 'donut',
+            columns: [
+                ['0-4', zero_four],
+                ['5-14', five_fourteen],
+                ['15-25', fifteen_twentyfour],
+                ['25-44', twentyfive_fourtyfour],
+                ['45-64', fourtyfive_sixtyfour],
+                ['65+', sixtyfive_plus]
+            ]
+        }
+    });
 
     //Open Side Menu
     $.sidr('open', 'side_menu');

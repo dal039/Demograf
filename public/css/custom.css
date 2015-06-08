@@ -43,14 +43,14 @@ body {
     min-height: 100vh;
 }
 
-path {
+#map path {
     cursor: pointer !important;
     stroke-width: 1.5px !important;
     fill: #2196f3 !important;
 }
 
-path:hover,
-path.highlighted {
+#map path:hover,
+#map path.highlighted {
     fill: #f39 !important;
 }
 /* Side Menu */
