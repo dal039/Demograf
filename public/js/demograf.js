@@ -29,7 +29,8 @@ var open_side_menu = function(theArea) {
                 var female = ((Demograf.regionInfo[key])['Gender Population'])['Female Population'];
                 var male = ((Demograf.regionInfo[key])['Gender Population'])['Male Population'];
                 var largest_gender = ((Demograf.regionInfo[key])['Gender Population'])['Largest Gender'];
-
+                console.log(female);
+                console.log(male);
                 //Housing Cost
                 var twenty_twentynine = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing 20-29% (Average)'];
                 var greater_thirty = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing  >30% (Average)'];
@@ -77,9 +78,10 @@ var open_side_menu = function(theArea) {
     ));
 
     //Age Graph
-    var chart = c3.generate({
+    var age_chart = c3.generate({
+  bindto: '#age_chart',
         donut: {
-            title: "Ages"
+            title: "Age Breakdown"
         },
         data: {
             type: 'donut',
@@ -90,6 +92,21 @@ var open_side_menu = function(theArea) {
                 ['25-44', twentyfive_fourtyfour],
                 ['45-64', fourtyfive_sixtyfour],
                 ['65+', sixtyfive_plus]
+            ]
+        }
+    });
+
+    //Sex Graph
+    var sex_chart = c3.generate({
+        bindto: '#sex_chart',
+        donut: {
+            title: "Sex Breakdown"
+        },
+        data: {
+            type: 'donut',
+            columns: [
+                ['Male', male],
+                ['Female', female]
             ]
         }
     });
