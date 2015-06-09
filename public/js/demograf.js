@@ -704,6 +704,7 @@ var Demograf = Demograf || (function() {
                         if (key == data[i].Area) {
                             (self.regionInfo[key])['Percentage High School'] = (data[i])['Percentage High School'];
                             (self.regionInfo[key])['Percentage Bachelor Degree'] = (data[i])['Percentage Bachelor Degree'];
+                            (self.regionInfo[key])['Percentage Associate Degree'] = (data[i])['Percentage Associate Degree'];
                             (self.regionInfo[key])['Percentage Master Degree'] = (data[i])['Percentage Master Degree'];
                             break;
                         }
@@ -823,6 +824,10 @@ var Demograf = Demograf || (function() {
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
                             (self.regionInfo[key])['Percentage Single'] = (data[i])['Percentage Single'];
+                            (self.regionInfo[key])['Percentage Married'] = (data[i])['Percentage Married'];
+                            (self.regionInfo[key])['Percentage Seperated'] = (data[i])['Percentage Seperated'];
+                            (self.regionInfo[key])['Percentage Widowed'] = (data[i])['Percentage Widowed'];
+                            (self.regionInfo[key])['Percentage Divorced'] = (data[i])['Percentage Divorced'];
                             break;
                         }
                     }
@@ -859,10 +864,6 @@ var Demograf = Demograf || (function() {
                 }
             }
         });
-
-        //NEED ALL EDUCATION
-        //NEED ALL MARITAL STATUS
-        //NEED ALL OCUPATION
 
     };
     /* Create Map */
@@ -907,7 +908,6 @@ var Demograf = Demograf || (function() {
         "Percentage Below Poverty": {},
         "Median House Value": {},
         "Median Contract Rent": {},
-        "Percentage Other Language": {},
         "Percentage Bachelor Degree": {}
     };
 

@@ -123,11 +123,14 @@ exports.getEducation = function(req, res) {
         if (err) return console.log(err);
 
         var query = 'SELECT "Area", "Education", "Population" ' +
-            'FROM hhsa_san_diego_demographics_education_2012_norm ' + 
+            'FROM hhsa_san_diego_demographics_education_2012_norm ' +  
             'WHERE "Education" = \'Bachelor\'\'s degree (age 25 and older)\' ' +
             'OR "Education" = \'Any (Population 25 and older)\' ' +
+            'OR "Education" = \'Associate\'\'s degree (age 25 and older)\' ' +
             'OR "Education" = \'High school graduate (include equivalency (age 25 and older))\' ' +
             'OR "Education" = \'Master\'\'s degree (age 25 and older)\'';
+
+
         client.query(query, function(err, result) {
             if (err) return console.log(err);
 
@@ -139,18 +142,18 @@ exports.getEducation = function(req, res) {
             });
 
             var filteredResults = [];
-            for (var i = 0; i < result.rows.length; i += 4) {
+            for (var i = 0; i < result.rows.length; i += 5) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
                     'Percentage High School': (result.rows[i + 1].Population / result.rows[i].Population)*100,
-                    'Percentage Bachelor Degree': (result.rows[i + 2].Population / result.rows[i].Population)*100,
-                    'Percentage Master Degree': (result.rows[i + 3].Population / result.rows[i].Population)*100
+                    'Percentage Associate Degree': (result.rows[i + 2].Population / result.rows[i].Population)*100,
+                    'Percentage Bachelor Degree': (result.rows[i + 3].Population / result.rows[i].Population)*100,
+                    'Percentage Master Degree': (result.rows[i + 4].Population / result.rows[i].Population)*100
                 };
 
                 filteredResults.push(areaObj);
             }
 
-            console.log(filteredResults);
             res.end(JSON.stringify(filteredResults));
 
         });
@@ -387,7 +390,11 @@ exports.getMaritalStatus = function(req, res) {
         var query = 'SELECT "Area", "Marital Status", "Total" ' +
             'FROM hhsa_san_diego_demographics_marital_status_2012_norm ' +
             'WHERE "Marital Status" = \'Any (Total Population 15+)\' ' +
-            'OR "Marital Status" = \'Single\'';
+            'OR "Marital Status" = \'Single\' ' +
+            'OR "Marital Status" = \'Married\' ' +
+            'OR "Marital Status" = \'Seperated\' ' +
+            'OR "Marital Status" = \'Widowed\' ' +
+            'OR "Marital Status" = \'Divorced\'';
         client.query(query, function(err, result) {
 
             if (err) return console.log(err);
@@ -400,10 +407,14 @@ exports.getMaritalStatus = function(req, res) {
             });
 
             var filteredResults = [];
-            for (var i = 0; i < result.rows.length; i += 2) {
+            for (var i = 0; i < result.rows.length; i += 6) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
-                    'Percentage Single': result.rows[i + 1].Total / result.rows[i].Total
+                    'Percentage Single': (result.rows[i + 1].Total / result.rows[i].Total)*100,
+                    'Percentage Married': (result.rows[i + 2].Total / result.rows[i].Total)*100,
+                    'Percentage Seperated': (result.rows[i + 3].Total / result.rows[i].Total)*100,
+                    'Percentage Widowed': (result.rows[i + 4].Total / result.rows[i].Total)*100,
+                    'Percentage Divorced': (result.rows[i + 5].Total / result.rows[i].Total)*100
                 };
 
                 filteredResults.push(areaObj);
