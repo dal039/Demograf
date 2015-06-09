@@ -22,7 +22,10 @@ var updateMap = function() {
                     Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
                     break;
                 }
-
+            }
+        }
+    }
+};
 /*var updateMapTwoFilters = function() {
 
     for (var key in Demograf.regionInfo) {
@@ -66,23 +69,23 @@ var open_side_menu = function(theArea) {
 
             if (key == theArea) {
                 //Age Population
-                var zero_four = ((Demograf.regionInfo[key])['Age Population'])['0-4 Population'];
-                var five_fourteen = ((Demograf.regionInfo[key])['Age Population'])['5-14 Population'];
-                var fifteen_twentyfour = ((Demograf.regionInfo[key])['Age Population'])['15-24 Population'];
-                var twentyfive_fourtyfour = ((Demograf.regionInfo[key])['Age Population'])['25-44 Population'];
-                var fourtyfive_sixtyfour = ((Demograf.regionInfo[key])['Age Population'])['45-64  Population'];
-                var sixtyfive_plus = ((Demograf.regionInfo[key])['Age Population'])['65+ Population'];
-                var largest_age = ((Demograf.regionInfo[key])['Age Population'])['Largest Age'];
+                var zero_four = ((Demograf.regionInfo[key]))['0-4 Population'];
+                var five_fourteen = ((Demograf.regionInfo[key]))['5-14 Population'];
+                var fifteen_twentyfour = ((Demograf.regionInfo[key]))['15-24 Population'];
+                var twentyfive_fourtyfour = ((Demograf.regionInfo[key]))['25-44 Population'];
+                var fourtyfive_sixtyfour = ((Demograf.regionInfo[key]))['45-64  Population'];
+                var sixtyfive_plus = ((Demograf.regionInfo[key]))['65+ Population'];
+                var largest_age = ((Demograf.regionInfo[key]))['Largest Age'];
 
                 //Gender Population
-                var female = ((Demograf.regionInfo[key])['Gender Population'])['Female Population'];
-                var male = ((Demograf.regionInfo[key])['Gender Population'])['Male Population'];
-                var largest_gender = ((Demograf.regionInfo[key])['Gender Population'])['Largest Gender'];
+                var female = ((Demograf.regionInfo[key]))['Female Population'];
+                var male = ((Demograf.regionInfo[key]))['Male Population'];
+                var largest_gender = ((Demograf.regionInfo[key]))['Largest Gender'];
 
                 //Housing Cost
-                var twenty_twentynine = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing 20-29% (Average)'];
-                var greater_thirty = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing  >30% (Average)'];
-                var less_twenty = ((Demograf.regionInfo[key])['Housing Cost'])['Percent of Household Income on Housing <20% (Average)'];
+                var twenty_twentynine = ((Demograf.regionInfo[key]))['Percent of Household Income on Housing 20-29% (Average)'];
+                var greater_thirty = ((Demograf.regionInfo[key]))['Percent of Household Income on Housing  >30% (Average)'];
+                var less_twenty = ((Demograf.regionInfo[key]))['Percent of Household Income on Housing <20% (Average)'];
                 //Get rid of percentages
                 twenty_twentynine = numeral().unformat(twenty_twentynine);
                 greater_thirty = numeral().unformat(greater_thirty);
@@ -114,20 +117,20 @@ var open_side_menu = function(theArea) {
                 percentage_unemployed = numeral(percentage_unemployed * 100).format('0.00');
 
                 //Cash Assistance
-                var cash_assistance = ((Demograf.regionInfo[key])['Public Programs'])['Percentage With Cash Assistance'];
+                var cash_assistance = ((Demograf.regionInfo[key]))['Percentage With Cash Assistance'];
                 cash_assistance = numeral(cash_assistance * 100).format('0.00');
 
                 //SNAP
-                var snap = ((Demograf.regionInfo[key])['Public Programs'])['Percentage With SNAP'];
+                var snap = ((Demograf.regionInfo[key]))['Percentage With SNAP'];
                 snap = numeral(snap * 100).format('0.00');
 
                 //Race Population
-                var asian = ((Demograf.regionInfo[key])['Race Population'])['Asian/Pacific Islander Population'];
-                var black = ((Demograf.regionInfo[key])['Race Population'])['Black Population'];
-                var hispanic = ((Demograf.regionInfo[key])['Race Population'])['Hispanic Population'];
-                var white = ((Demograf.regionInfo[key])['Race Population'])['White Population'];
-                var other = ((Demograf.regionInfo[key])['Race Population'])['Other Race/Ethnicity Population'];
-                var largest_race = ((Demograf.regionInfo[key])['Race Population'])['Largest Race'];
+                var asian = ((Demograf.regionInfo[key]))['Asian/Pacific Islander Population'];
+                var black = ((Demograf.regionInfo[key]))['Black Population'];
+                var hispanic = ((Demograf.regionInfo[key]))['Hispanic Population'];
+                var white = ((Demograf.regionInfo[key]))['White Population'];
+                var other = ((Demograf.regionInfo[key]))['Other Race/Ethnicity Population'];
+                var largest_race = ((Demograf.regionInfo[key]))['Largest Race'];
                 break;
             }
         }
