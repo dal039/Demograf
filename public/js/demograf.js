@@ -1,3 +1,26 @@
+var updateMap = function(filter, lower, upper) {
+
+    for (var key in Demograf.regionInfo) {
+        if (Demograf.regionInfo.hasOwnProperty(key)) {
+            var regionId = key.replace(/ /g, "_");
+
+            currRegionData = numeral().unformat((Demograf.regionInfo[key])[filter]);
+
+            if( (currRegionData >= lower) && (currRegionData <= upper)  )  {
+                Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
+            }
+            else {
+                Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
+            }
+        }
+    }
+
+};
+
+var updateMapSocial = function(filter) {
+
+};
+
 /*****************************************************************************************
  ********************************** SIDE MENU ********************************************
  *****************************************************************************************/
@@ -270,7 +293,7 @@ $(function() {
         grid_snap: true,
         force_edges: true,
         onChange: function(data) {
-            console.log("INCOME CHANGED: " + data.to);
+            updateMap('Median Income', data.from, data.to);
         }
     });
 });
@@ -691,7 +714,7 @@ var Demograf = Demograf || (function() {
             },
             done: function(datamap) {
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                    console.log(geography.properties.name);
+                    //console.log(geography.properties.name);
                     open_side_menu(geography.properties.name);
                 });
             }
@@ -741,5 +764,15 @@ $(document).ready(function() {
             }
         }
     });
+
+    for (var key in Demograf.regionInfo) {
+        if (Demograf.regionInfo.hasOwnProperty(key)) {
+
+            d3.select('#map').style('fill', '#212121', 'important');
+            //$('#map #' + key).attr('style', function(i,s) { return s + 'fill: #212121px !important;' });
+        }
+    }
     console.log(Demograf.regionInfo);
+
 });
+
