@@ -73,9 +73,21 @@ var open_side_menu = function(theArea) {
                 var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
                 percentage_below_poverty = numeral(percentage_below_poverty).format('0.00');
 
-                //Percentage Educated
-                var percentage_educated = (Demograf.regionInfo[key])['Percentage Bachelor Degree'];
-                percentage_educated = numeral(percentage_educated * 100).format('0.00');
+                //Percentage High School
+                var high_school = (Demograf.regionInfo[key])['Percentage High School'];
+                high_school = numeral(high_school).format('0.00');
+
+                //Percentage Associates
+                var high_school = (Demograf.regionInfo[key])['Percentage High School'];
+                high_school = numeral(high_school).format('0.00');
+
+                //Percentage Bachelors 
+                var bachelor = (Demograf.regionInfo[key])['Percentage Bachelor Degree'];
+                bachelor = numeral(bachelor).format('0.00');
+
+                //Percentage Masters
+                var master = (Demograf.regionInfo[key])['Percentage Master Degree'];
+                master = numeral(master).format('0.00');
 
                 //Percentage Single
                 var percentage_single = (Demograf.regionInfo[key])['Percentage Single'];
@@ -183,23 +195,60 @@ var open_side_menu = function(theArea) {
         gauge: {}
     });
 
-    //Percentage Educated
-    var educated_chart = c3.generate({
-        bindto: '#educated_chart',
-        donut: {
-            title: "Education Breakdown"
-        },
+    //Percentage with High School Diploma
+    var high_school_chart = c3.generate({
+        bindto: '#high_school_chart',
         data: {
-            type: 'donut',
             columns: [
-                ['Population 25+ with Bachelor\'s Degree', percentage_educated]
-            ]
-        }
+                ['Population 25+ with High School Deiploma', high_school]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+    //associates_chart
+    var associates_chart = c3.generate({
+        bindto: '#associates_chart',
+        data: {
+            columns: [
+                ['Population 25+ with Associate\'s Degree', high_school]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
+    //bachelors_chart
+    var bachelors_chart = c3.generate({
+        bindto: '#bachelors_chart',
+        data: {
+            columns: [
+                ['Population 25+ with Bachelor\'s Degree', bachelor]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
+    });
+
+    //masters_chart
+    var masters_chart = c3.generate({
+        bindto: '#masters_chart',
+        data: {
+            columns: [
+                ['Population 25+ with Master\'s Degree', master]
+            ],
+            type: 'gauge',
+
+        },
+        gauge: {}
     });
 
     //Percentage Single
-    var single_chart = c3.generate({
-        bindto: '#single_chart',
+    var marital_status_chart = c3.generate({
+        bindto: '#marital_status_chart',
         donut: {
             title: "Marital status"
         },
