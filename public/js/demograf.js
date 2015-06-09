@@ -740,6 +740,8 @@ $(document).ready(function() {
                 }
             }
         }
+        d3.select("path#Vista").style("fill", "#000000");
     });
+   //console.log(d3.select("Vista"));
     console.log(Demograf.regionInfo);
 });

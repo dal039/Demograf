@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/jquery.sidr.dark.css">
     <link rel="stylesheet" href="css/c3.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.vertical-tabs.min.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
 
@@ -152,25 +153,38 @@
     </div>
     <!--SLIDE OUT MENU-->
     <div id="side_menu">
-        <p class="text-right side_menu_top" id="side_menu_top">
-            <a href="#" class="btn btn-link" onclick="$.sidr('close', 'side_menu');">
-                <i class="fa fa-times fa-lg"></i>
-            </a>
-        </p>
+        <p class="text-right side_menu_top" id="side_menu_top"><a href="#" class="btn btn-link" onclick="$.sidr('close', 'side_menu');"><i class="fa fa-times fa-lg"></i></a></p>
         <div id="inside_side_menu" class="inside_side_menu container-fluid">
             <div id="area_name"></div>
-            <div id="age_chart"></div>
-            <div id="sex_chart"></div>
-            <div id="housingcost_chart"></div>
-            <div id="median_house_value_chart"></div>
-            <div id="median_income_value_chart"></div>
-            <div id="poverty_chart"></div>
-            <div id="educated_chart"></div>
-            <div id="single_chart"></div>
-            <div id="unemployed_chart"></div>
-            <div id="cash_chart"></div>
-            <div id="snap_chart"></div>
-            <div id="race_chart"></div>
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a data-toggle="tab" href="#one">Economic</a></li>
+                <li><a data-toggle="tab" href="#two">Housing</a></li>
+                <li><a data-toggle="tab" href="#three">Social</a></li>
+                <li><a data-toggle="tab" href="#four">Education</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="one" class="tab-pane fade in active">
+                    <div id="median_income_value_chart"></div>
+                    <div id="poverty_chart"></div>
+                    <div id="unemployed_chart"></div>
+                </div>
+                <div id="two" class="tab-pane fade in active">
+                    <div id="housingcost_chart"></div>
+                    <div id="median_house_value_chart"></div>
+                </div>
+                <div id="three" class="tab-pane fade in active">
+                    <div id="age_chart"></div>
+                    <div id="sex_chart">
+                        <div id="educated_chart"></div>
+                        <div id="single_chart"></div>
+                    </div>
+                    <div id="cash_chart"></div>
+                    <div id="snap_chart"></div>
+                    <div id="race_chart"></div>
+                </div>
+                <div id="four" class="tab-pane fade in active">
+                </div>
+            </div>
         </div>
     </div>
     <!--JS LIBRARIES-->
