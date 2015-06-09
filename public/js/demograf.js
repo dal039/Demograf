@@ -616,6 +616,7 @@ var Demograf = Demograf || (function() {
         });
 
         $.getJSON("/delphi_public_programs", function(data) {
+            console.log(data);
             for (var i = 0; i < data.length; ++i) {
                 for (var key in self.regionInfo) {
                     if (self.regionInfo.hasOwnProperty(key)) {

@@ -338,7 +338,7 @@ exports.getPublicPrograms = function(req, res) {
             });
 
             var filteredResults = [];
-            for (var i = 0; i < result.rows.length; i += 2) {
+            for (var i = 0; i < result.rows.length; ++i ) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
                     'Percentage With SNAP': (result.rows[i])['Households With SNAP'] / (result.rows[i])['Total Households'],
@@ -348,6 +348,7 @@ exports.getPublicPrograms = function(req, res) {
                 filteredResults.push(areaObj);
             }
 
+            console.log(result.rows);
             res.end(JSON.stringify(filteredResults));
         });
     });
