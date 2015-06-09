@@ -123,10 +123,11 @@ exports.getEducation = function(req, res) {
         if (err) return console.log(err);
 
         var query = 'SELECT "Area", "Education", "Population" ' +
-            'FROM hhsa_san_diego_demographics_education_2012_norm ' +
+            'FROM hhsa_san_diego_demographics_education_2012_norm ' + 
             'WHERE "Education" = \'Bachelor\'\'s degree (age 25 and older)\' ' +
-            'OR "Education" = \'Any (Population 25 and older)\'';
-
+            'OR "Education" = \'Any (Population 25 and older)\' ' +
+            'OR "Education" = \'High school graduate (include equivalency (age 25 and older))\' ' +
+            'OR "Education" = \'Master\'\'s degree (age 25 and older)\'';
         client.query(query, function(err, result) {
             if (err) return console.log(err);
 
@@ -138,15 +139,18 @@ exports.getEducation = function(req, res) {
             });
 
             var filteredResults = [];
-            for (var i = 0; i < result.rows.length; i += 2) {
+            for (var i = 0; i < result.rows.length; i += 4) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
-                    'Percentage Bachelor Degree': (result.rows[i + 1].Population / result.rows[i].Population)*100
+                    'Percentage High School': (result.rows[i + 1].Population / result.rows[i].Population)*100,
+                    'Percentage Bachelor Degree': (result.rows[i + 2].Population / result.rows[i].Population)*100,
+                    'Percentage Master Degree': (result.rows[i + 3].Population / result.rows[i].Population)*100
                 };
 
                 filteredResults.push(areaObj);
             }
 
+            console.log(filteredResults);
             res.end(JSON.stringify(filteredResults));
 
         });

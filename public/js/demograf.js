@@ -647,7 +647,9 @@ var Demograf = Demograf || (function() {
 
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
+                            (self.regionInfo[key])['Percentage High School'] = (data[i])['Percentage High School'];
                             (self.regionInfo[key])['Percentage Bachelor Degree'] = (data[i])['Percentage Bachelor Degree'];
+                            (self.regionInfo[key])['Percentage Master Degree'] = (data[i])['Percentage Master Degree'];
                             break;
                         }
                     }
