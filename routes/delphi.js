@@ -366,7 +366,23 @@ exports.getOccupationalIndustry = function(req, res) {
     pg.connect(conString, function(err, client, done) {
         if (err) return console.log(err);
 
-        var query = 'SELECT * FROM hhsa_san_diego_demographics_occupat_industry_2012_norm';
+        var query = 'SELECT "Area", "Occupation", "Industry" ' + 
+                    'FROM hhsa_san_diego_demographics_occupat_industry_2012_norm ' +
+                    'WHERE "Industry" = \'Total all occupations\' ' + 
+                    'OR "Industry" = \'Agriculture, forestry, mining\' ' + 
+                    'OR "Industry" = \'Utilities\' ' + 
+                    'OR "Industry" = \'Construction\' ' + 
+                    'OR "Industry" = \'Manufacturing\' ' + 
+                    'OR "Industry" = \'Wholesale trade\' ' + 
+                    'OR "Industry" = \'Retail trade\' ' + 
+                    'OR "Industry" = \'Transportation, warehousing, and utilities\' ' + 
+                    'OR "Industry" = \'Information and communications\' ' + 
+                    'OR "Industry" = \'Finance, insurance, and real estate\' ' + 
+                    'OR "Industry" = \'Professional, scientific, management, administrative\' ' + 
+                    'OR "Industry" = \'Educational, social and health services\' ' + 
+                    'OR "Industry" = \'Arts, entertainment, recreation, accommodations, food services\' ' + 
+                    'OR "Industry" = \'Other services\' ';
+
         client.query(query, function(err, result) {
             if (err) return console.log(err);
 
@@ -376,7 +392,31 @@ exports.getOccupationalIndustry = function(req, res) {
             res.writeHead("200", {
                 'content-type': 'application/json'
             });
-            res.end(JSON.stringify(result.rows));
+
+            var filteredResults = [];
+            for (var i = 0; i < result.rows.length; i += 14) {
+                var areaObj = {
+                    'Area': checkAreaName(result.rows[i].Area),
+                    'Percentage Agriculture': (result.rows[i + 1].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Utilities': (result.rows[i + 2].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Construction': (result.rows[i + 3].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Manufacturing': (result.rows[i + 4].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Wholesale Trade': (result.rows[i + 5].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Retail Trade': (result.rows[i + 6].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Transportation': (result.rows[i + 7].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Information and Communication': (result.rows[i + 8].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Finance': (result.rows[i + 9].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Professional': (result.rows[i + 10].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Educational': (result.rows[i + 11].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Arts': (result.rows[i + 12].Occupation / result.rows[i].Occupation)*100,
+                    'Percentage Other': (result.rows[i + 13].Occupation / result.rows[i].Occupation)*100
+                };
+
+                filteredResults.push(areaObj);
+            }
+
+            res.end(JSON.stringify(filteredResults));
+
         });
     });
 };

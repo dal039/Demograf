@@ -812,9 +812,27 @@ var Demograf = Demograf || (function() {
             }
         });
 
-        //$.getJSON("/delphi_occupational_industry", function(data) {
-        //  console.log(data);
-        //});
+        $.getJSON("/delphi_occupational_industry", function(data) {
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            delete data[i].Area;
+                            (self.regionInfo[key])['Occupational Industry'] = (data[i]);
+
+                            /*for (var k in data[i]) {
+                                self.regionInfo[key][k] = data[i][k];
+                            }*/
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+        });
 
         $.getJSON("/delphi_marital_status", function(data) {
             for (var i = 0; i < data.length; ++i) {
