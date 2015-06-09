@@ -1,33 +1,62 @@
-//var updateModifiedFilters = function(filter1, filter2, lower, upper) {
-    //Demograf.modifiedFilters
-//};
-
-var updateMap = function(filter1, filter2, lower, upper) {
+var updateMap = function() {
 
     for (var key in Demograf.regionInfo) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
+
             var regionId = key.replace(/ /g, "_");
+            var filterData, lower, upper, currRegionData;
 
-            if(filter2 === null) {
-                currRegionData = numeral().unformat((Demograf.regionInfo[key])[filter1]);
-            } else {
-                currRegionData = numeral().unformat( ((Demograf.regionInfo[key])[filter1])[filter2] );
-            }
+            // loop through all filters for current region, if fail even once then break to next region
+            for( var k in Demograf.allFilters) {
+                
+                filterData = Demograf.allFilters[k];
+                lower = filterData.lower;
+                upper = filterData.upper;
 
-            if( (currRegionData >= lower) && (currRegionData <= upper)  )  {
-                Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
-            }
-            else {
-                Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
+                currRegionData = numeral().unformat( ((Demograf.regionInfo[key])[k]) );
+            
+                if( (currRegionData >= lower) && (currRegionData <= upper) ) {
+                    Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
+                }
+                else {
+                    Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
+                    break;
+                }
             }
         }
     }
-
 };
 
-var updateMapSocial = function(filter) {
+/*var updateMapTwoFilters = function() {
 
-};
+    for (var key in Demograf.regionInfo) {
+        if (Demograf.regionInfo.hasOwnProperty(key)) {
+
+            var regionId = key.replace(/ /g, "_");
+            var filterData, lower, upper, currRegionData;
+
+            // loop through all filters for current region, if fail even once then break to next region
+            for( var k in Demograf.allTwoFilters) {
+                
+                var currTwoFilter = Demograf.allTwoFilters[k];
+                for( var k2 in currTwoFilter) {
+
+                    lower = currTwoFilter[k2].lower;
+                    upper = currTwoFilter[k2].upper;
+                    currRegionData = numeral().unformat( (Demograf.regionInfo[key])[k][k2] );
+                
+                    if( (currRegionData >= lower) && (currRegionData <= upper) ) {
+                        Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
+                    }
+                    else {
+                        Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
+                        break;
+                    }
+                }
+            }
+        }
+    }
+};*/
 
 /*****************************************************************************************
  ********************************** SIDE MENU ********************************************
@@ -300,9 +329,14 @@ $(function() {
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Median Income'].lower = data.from;
+            Demograf.allFilters['Median Income'].upper = data.to;
+        },
         onChange: function(data) {
-            //updateModifiedFilters();
-            updateMap('Median Income', null, data.from, data.to);
+            Demograf.allFilters['Median Income'].lower = data.from;
+            Demograf.allFilters['Median Income'].upper = data.to;
+            updateMap();
         }
     });
 });
@@ -319,10 +353,15 @@ $(function() {
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Percentage Unemployed'].lower = data.from;
+            Demograf.allFilters['Percentage Unemployed'].upper = data.to;
+        },
         onChange: function(data) {
-            updateMap('Percentage Unemployed', null, data.from, data.to);
+            Demograf.allFilters['Percentage Unemployed'].lower = data.from;
+            Demograf.allFilters['Percentage Unemployed'].upper = data.to;
+            updateMap();  
         }
-
     });
 });
 
@@ -338,10 +377,15 @@ $(function() {
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Percentage With SNAP'].lower = data.from;
+            Demograf.allFilters['Percentage With SNAP'].upper = data.to;
+        },
         onChange: function(data) {
-            updateMap('Public Programs', 'Percentage With SNAP', data.from, data.to);
+            Demograf.allFilters['Percentage With SNAP'].lower = data.from;
+            Demograf.allFilters['Percentage With SNAP'].upper = data.to;
+            updateMap();
         }
-
     });
 });
 
@@ -350,13 +394,23 @@ $(function() {
     $("#cash_assistance").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 100,
-        step: 10,
+        max: 8,
+        step: 1,
         prettify_enabled: true,
         postfix: "%",
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Percentage With Cash Assistance'].lower = data.from;
+            Demograf.allFilters['Percentage With Cash Assistance'].upper = data.to;
+        },
+        onChange: function(data) {
+            Demograf.allFilters['Percentage With Cash Assistance'].lower = data.from;
+            Demograf.allFilters['Percentage With Cash Assistance'].upper = data.to;
+            updateMap();
+        }
+
     });
 });
 
@@ -541,7 +595,12 @@ var Demograf = Demograf || (function() {
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
                             delete data[i].Area;
-                            (self.regionInfo[key])['Housing Cost'] = (data[i]);
+                            //(self.regionInfo[key])['Housing Cost'] = (data[i]);
+
+                            for( var k in data[i] ) {
+                                self.regionInfo[key][k] = data[i][k];
+                            }
+
                             break;
                         }
                     }
@@ -602,7 +661,12 @@ var Demograf = Demograf || (function() {
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
                             delete data[i].Area;
-                            (self.regionInfo[key])['Age Population'] = (data[i]);
+                            //(self.regionInfo[key])['Age Population'] = (data[i]);
+
+                            for( var k in data[i] ) {
+                                self.regionInfo[key][k] = data[i][k];
+                            }
+
                             break;
                         }
                     }
@@ -618,7 +682,12 @@ var Demograf = Demograf || (function() {
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
                             delete data[i].Area;
-                            (self.regionInfo[key])['Gender Population'] = (data[i]);
+                            //(self.regionInfo[key])['Gender Population'] = (data[i]);
+
+                            for( var k in data[i] ) {
+                                self.regionInfo[key][k] = data[i][k];
+                            }
+
                             break;
                         }
                     }
@@ -634,7 +703,12 @@ var Demograf = Demograf || (function() {
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
                             delete data[i].Area;
-                            (self.regionInfo[key])['Race Population'] = (data[i]);
+                            //(self.regionInfo[key])['Race Population'] = (data[i]);
+
+                            for( var k in data[i] ) {
+                                self.regionInfo[key][k] = data[i][k];
+                            }
+
                             break;
                         }
                     }
@@ -665,7 +739,12 @@ var Demograf = Demograf || (function() {
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
                             delete data[i].Area;
-                            (self.regionInfo[key])['Public Programs'] = (data[i]);
+                            //(self.regionInfo[key])['Public Programs'] = (data[i]);
+
+                            for( var k in data[i] ) {
+                                self.regionInfo[key][k] = data[i][k];
+                            }
+
                             break;
                         }
                     }
@@ -739,7 +818,20 @@ var Demograf = Demograf || (function() {
 
     };
 
-    self.modifiedFilters = {};
+    self.allFilters = {
+        "Median Income" : {},
+        "Percentage Unemployed" : {},    
+        "Percentage With SNAP" : {},
+        "Percentage With Cash Assistance" : {}
+        
+    };
+
+    /*self.allTwoFilters = {
+        "Public Programs" : { 
+            "Percentage With SNAP" : {},
+            "Percentage With Cash Assistance": {} 
+        } 
+    };*/
 
     /** 
      * initialize 
