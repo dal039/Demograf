@@ -24,10 +24,9 @@
 <body>
     <!--FILTERS AND MAP-->
     <div class="container-fluid" id="form">
-        <h3>Filters
-        </h3>
         <div class="row">
             <div class="col-md-4">
+                <h3>Filters</h3>
                 <!--SLIDERS-->
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a data-toggle="tab" href="#tab1">Economic</a></li>
@@ -40,16 +39,16 @@
                         <p>Median Income</p>
                         <input type="text" id="income" value="" name="income" />
                         <br>
-                        <p>Unemployed Percentage</p>
+                        <p>Percentage Unemployed</p>
                         <input type="text" id="unemployed" value="" name="unemployed" />
                         <br>
-                        <p>Percentage of those with SNAP</p>
+                        <p>Percentage with SNAP</p>
                         <input type="text" id="snap" value="" name="snap" />
                         <br>
-                        <p>Percentage of those with Cash Assistance</p>
+                        <p>Percentage with Cash Assistance</p>
                         <input type="text" id="cash_assistance" value="" name="cash_assistance" />
                         <br>
-                        <p>Poverty Percentage</p>
+                        <p>Percentage Below Poverty</p>
                         <input type="text" id="poverty" value="" name="poverty" />
                         <br>
                     </div>
@@ -61,7 +60,52 @@
                         <input type="text" id="rent" value="" name="rent" />
                     </div>
                     <div id="tab3" class="tab-pane fade">
-                        <p>Most Popular Occupation</p>
+                        <p>Most Common Race</p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <select id="race" name="race" class="form-control">
+                                        <option value="all">All</option>
+                                        <option value="white">White</option>
+                                        <option value="hispanic">Hispanic</option>
+                                        <option value="black">Black</option>
+                                        <option value="asian_pacific_islander">Asian Pacific Islander</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <p>Most Common Age</p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <select id="age" name="age" class="form-control">
+                                        <option value="all">All</option>
+                                        <option value="0-4">0-4</option>
+                                        <option value="5-14">5-14</option>
+                                        <option value="5-24">5-24</option>
+                                        <option value="45-64">45-64</option>
+                                        <option value="65+">65+</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <p>Most Common Sex</p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <select id="sex" name="sex" class="form-control">
+                                        <option value="all">All</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <p>Most Common Occupation</p>
                         <form>
                             <fieldset>
                                 <div class="form-group">
@@ -85,54 +129,9 @@
                                 </div>
                             </fieldset>
                         </form>
-                        <br>
-                        <p>Most Popular Race</p>
-                        <form>
-                            <fieldset>
-                                <div class="form-group">
-                                    <select id="race" name="race" class="form-control">
-                                        <option value="all">All</option>
-                                        <option value="white">White</option>
-                                        <option value="hispanic">Hispanic</option>
-                                        <option value="black">Black</option>
-                                        <option value="asian_pacific_islander">Asian Pacific Islander</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </fieldset>
-                        </form>
-                        <br>
-                        <p>Most Popular Age</p>
-                        <form>
-                            <fieldset>
-                                <div class="form-group">
-                                    <select id="age" name="age" class="form-control">
-                                        <option value="all">All</option>
-                                        <option value="0-4">0-4</option>
-                                        <option value="5-14">5-14</option>
-                                        <option value="5-24">5-24</option>
-                                        <option value="45-64">45-64</option>
-                                        <option value="65+">65+</option>
-                                    </select>
-                                </div>
-                            </fieldset>
-                        </form>
-                        <br>
-                        <p>Most Popular Sex</p>
-                        <form>
-                            <fieldset>
-                                <div class="form-group">
-                                    <select id="sex" name="sex" class="form-control">
-                                        <option value="all">All</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                </div>
-                            </fieldset>
-                        </form>
                     </div>
                     <div id="tab4" class="tab-pane fade">
-                        <p>Percentage of People with Bachelor's Degree or Higher</p>
+                        <p>Percentage of People with Bachelor's Degree</p>
                         <input type="text" id="degree" value="" name="degree" />
                         <br>
                         <p>Percentage of People who Speak Another Language</p>
@@ -140,7 +139,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 ">
+                <h3 class="text-center">San Diego</h3>
                 <!--MAP-->
                 <div id="map"></div>
             </div>
