@@ -133,6 +133,59 @@ var open_side_menu = function(theArea) {
                 //Median Contract Rent
                 var median_contract_rent = ((Demograf.regionInfo[key]))['Median Contract Rent'];
                 median_contract_rent = numeral(median_contract_rent).format('$0,0.');
+
+                // Agriculture
+                var agriculture = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Agriculture'];
+                agriculture = numeral(agriculture).format('0.00');
+
+                // Percentage Arts
+                var arts = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Arts'];
+                arts = numeral(arts).format('0.00');
+
+                // Percentage Construction
+                var construction = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Construction'];
+                construction = numeral(construction).format('0.00');
+
+                // Percentage Educational
+                var educational = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Educational'];
+                educational = numeral(educational).format('0.00');
+
+                // Percentage Finance
+                var finance = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Finance'];
+                finance = numeral(finance).format('0.00');
+
+                // Percentage Information and Communication
+                var info_and_comm = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Information and Communication'];
+                info_and_comm = numeral(info_and_comm).format('0.00');
+
+                //Percentage Manufacturing
+                var manufacturing = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Manufacturing'];
+                manufacturing = numeral(manufacturing).format('0.00');
+
+                // Percentage Other
+                var occupation_other = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Other'];
+                occupation_other = numeral(occupation_other).format('0.00');
+
+                // Percentage Professional
+                var professional = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Professional'];
+                professional = numeral(professional).format('0.00');
+
+                // Percentage Retail Trade
+                var retail = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Retail Trade'];
+                retail = numeral(retail).format('0.00');
+
+
+                // Percentage Transportation
+                var transportation = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Transportation'];
+                transportation = numeral(transportation).format('0.00');
+
+                // Percentage Utilities
+                var utilities = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Utilities'];
+                utilities = numeral(utilities).format('0.00');
+
+                // Percentage Wholesale Trade
+                var wholesale_trade = ((Demograf.regionInfo[key])['Occupational Industry'])['Percentage Utilities'];
+                wholesale_trade = numeral(wholesale_trade).format('0.00');
                 break;
             }
         }
@@ -267,7 +320,7 @@ var open_side_menu = function(theArea) {
     var marital_status_chart = c3.generate({
         bindto: '#marital_status_chart',
         donut: {
-            title: "Marital status"
+            title: "Marital Status"
         },
         data: {
             type: 'donut',
@@ -281,6 +334,32 @@ var open_side_menu = function(theArea) {
         }
     });
 
+    //Occupations
+    var occupation_chart = c3.generate({
+        bindto: '#occupation_chart',
+        donut: {
+            title: "Occupations"
+        },
+        data: {
+            type: 'donut',
+            columns: [
+                ['Agriculture', agriculture],
+                ['Arts', arts],
+                ['Construction', construction],
+                ['Educational', educational],
+                ['Finance', finance],
+                ['Information & Communication', info_and_comm],
+                ['Manufacturing', manufacturing],
+                ['Other', occupation_other],
+                ['Professional', professional],
+                ['Retail', retail],
+                ['Transportation', transportation],
+                ['Utilities', utilities],
+                ['Wholesale Trade', wholesale_trade]
+
+            ]
+        }
+    });
     //Percentage unemployed
     var unemployed_chart = c3.generate({
         bindto: '#unemployed_chart',
