@@ -78,8 +78,9 @@ var open_side_menu = function(theArea) {
                 high_school = numeral(high_school).format('0.00');
 
                 //Percentage Associates
-                var high_school = (Demograf.regionInfo[key])['Percentage High School'];
-                high_school = numeral(high_school).format('0.00');
+
+                var associate = (Demograf.regionInfo[key])['Percentage Associate Degree'];
+                associate = numeral(associate).format('0.00');
 
                 //Percentage Bachelors 
                 var bachelor = (Demograf.regionInfo[key])['Percentage Bachelor Degree'];
@@ -89,9 +90,25 @@ var open_side_menu = function(theArea) {
                 var master = (Demograf.regionInfo[key])['Percentage Master Degree'];
                 master = numeral(master).format('0.00');
 
-                //Percentage Single
-                var percentage_single = (Demograf.regionInfo[key])['Percentage Single'];
-                percentage_single = numeral(percentage_single * 100).format('0.00');
+                //single
+                var single = (Demograf.regionInfo[key])['Percentage Single'];
+                single = numeral(single).format('0.00');
+
+                //married
+                var married = (Demograf.regionInfo[key])['Percentage Married'];
+                married = numeral(married).format('0.00');
+
+                //seperated
+                var seperated = (Demograf.regionInfo[key])['Percentage Seperated'];
+                seperated = numeral(seperated).format('0.00');
+
+                //widowed
+                var widowed = (Demograf.regionInfo[key])['Percentage Widowed'];
+                widowed = numeral(widowed).format('0.00');
+
+                //divorced
+                var divorced = (Demograf.regionInfo[key])['Percentage Divorced'];
+                divorced = numeral(divorced).format('0.00');
 
                 //Percentage Unemployed
                 var percentage_unemployed = (Demograf.regionInfo[key])['Percentage Unemployed'];
@@ -212,7 +229,7 @@ var open_side_menu = function(theArea) {
         bindto: '#associates_chart',
         data: {
             columns: [
-                ['Population 25+ with Associate\'s Degree', high_school]
+                ['Population 25+ with Associate\'s Degree', associate]
             ],
             type: 'gauge',
 
@@ -246,7 +263,7 @@ var open_side_menu = function(theArea) {
         gauge: {}
     });
 
-    //Percentage Single
+    //Marital Status
     var marital_status_chart = c3.generate({
         bindto: '#marital_status_chart',
         donut: {
@@ -255,7 +272,11 @@ var open_side_menu = function(theArea) {
         data: {
             type: 'donut',
             columns: [
-                ['Population 15+ Single', percentage_single]
+                ['Population 15+ Single', single],
+                ['Population 15+ Married', married],
+                ['Population 15+ Seperated', seperated],
+                ['Population 15+ Divorced', divorced],
+                ['Population 15+ Widowed', widowed]
             ]
         }
     });
