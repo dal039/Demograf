@@ -61,7 +61,7 @@
                     </div>
                     <div id="tab3" class="tab-pane fade">
                         <p>Most Common Race</p>
-                        <form>
+                        <form class="form-inline">
                             <fieldset>
                                 <div class="form-group">
                                     <select id="race" name="race" class="form-control">
@@ -77,7 +77,7 @@
                         </form>
                         <br>
                         <p>Most Common Age</p>
-                        <form>
+                        <form class="form-inline">
                             <fieldset>
                                 <div class="form-group">
                                     <select id="age" name="age" class="form-control">
@@ -93,7 +93,7 @@
                         </form>
                         <br>
                         <p>Most Common Sex</p>
-                        <form>
+                        <form class="form-inline">
                             <fieldset>
                                 <div class="form-group">
                                     <select id="sex" name="sex" class="form-control">
@@ -106,7 +106,7 @@
                         </form>
                         <br>
                         <p>Most Common Occupation</p>
-                        <form>
+                        <form class="form-inline">
                             <fieldset>
                                 <div class="form-group">
                                     <select id="occupation" name="occupation" class="form-control">
@@ -164,24 +164,30 @@
             <div class="tab-content">
                 <div id="one" class="tab-pane fade in active">
                     <div id="median_income_value_chart"></div>
-                    <div id="poverty_chart"></div>
+                    <p class="text-center">Median Income Value</p>
                     <div id="unemployed_chart"></div>
+                    <p class="text-center">Unemployed</p>
+                    <div id="poverty_chart"></div>
+                    <p class="text-center">Below Poverty</p>
+                    <div id="cash_chart"></div>
+                    <p class="text-center">On Cash Assistance</p>
+                    <div id="snap_chart"></div>
+                    <p class="text-center">On SNAP</p>
                 </div>
                 <div id="two" class="tab-pane fade in active">
-                    <div id="housingcost_chart"></div>
                     <div id="median_house_value_chart"></div>
+                    <p class="text-center">Median House Value</p>
+                    <div id="housingcost_chart"></div>
+                    <p class="text-center">Percent of Household Income on Housing</p>
                 </div>
                 <div id="three" class="tab-pane fade in active">
-                    <div id="age_chart"></div>
-                    <div id="sex_chart">
-                        <div id="educated_chart"></div>
-                        <div id="single_chart"></div>
-                    </div>
-                    <div id="cash_chart"></div>
-                    <div id="snap_chart"></div>
                     <div id="race_chart"></div>
+                    <div id="age_chart"></div>
+                    <div id="sex_chart"></div>
+                    <div id="single_chart"></div>
                 </div>
                 <div id="four" class="tab-pane fade in active">
+                    <div id="educated_chart"></div>
                 </div>
             </div>
         </div>
