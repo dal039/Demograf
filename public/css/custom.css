@@ -54,6 +54,10 @@ body {
 #map path.highlighted {
     fill: #f39 !important;
 }
+
+#san_diego_name {
+    font-weight: 300;
+}
 /* Side Menu */
 
 .sidr {
