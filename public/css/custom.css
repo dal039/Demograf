@@ -55,6 +55,14 @@ body {
     fill: #f39 !important;
 }
 
+#map #Miramar {
+    fill: #989898 !important;
+}
+
+#map #Coronado {
+    fill: #989898 !important;
+}
+
 #san_diego_name {
     font-weight: 300;
 }
@@ -62,7 +70,7 @@ body {
 
 .sidr {
     width: 460px;
-    background: white;
+    background: #D8D8D8;
 }
 
 .sidr.right {
