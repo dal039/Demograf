@@ -763,15 +763,9 @@ $(document).ready(function() {
                 }
             }
         }
+        d3.select("path#Vista").style("fill", "#000000");
     });
 
-    for (var key in Demograf.regionInfo) {
-        if (Demograf.regionInfo.hasOwnProperty(key)) {
-
-            d3.select('#map').style('fill', '#212121', 'important');
-            //$('#map #' + key).attr('style', function(i,s) { return s + 'fill: #212121px !important;' });
-        }
-    }
     console.log(Demograf.regionInfo);
 
 });
