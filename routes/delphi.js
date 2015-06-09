@@ -348,7 +348,6 @@ exports.getPublicPrograms = function(req, res) {
                 filteredResults.push(areaObj);
             }
 
-            console.log(result.rows);
             res.end(JSON.stringify(filteredResults));
         });
     });
@@ -490,6 +489,9 @@ var checkAreaName = function(area) {
             break;
         case "Mid-City":
             retName = "Mid City";
+            break;
+        case "Mt Empire":
+            retName = "Mountain Empire";
             break;
         default:
             break;

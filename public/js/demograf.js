@@ -1,8 +1,9 @@
 /*****************************************************************************************
- ********************************** SIDE MENU **************************************
+ ********************************** SIDE MENU ********************************************
  *****************************************************************************************/
 /* Grab Data and open side menu */
 var open_side_menu = function(theArea) {
+
     //Array to hold all median incomes
     var all_median_incomes = [];
     //Loop through object and add data to variables
@@ -10,6 +11,7 @@ var open_side_menu = function(theArea) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
             //add to all median incomes array
             all_median_incomes.push((Demograf.regionInfo[key])['Median House Value']);
+
             if (key == theArea) {
                 //Age Population
                 var zero_four = ((Demograf.regionInfo[key])['Age Population'])['0-4 Population'];
@@ -616,7 +618,6 @@ var Demograf = Demograf || (function() {
         });
 
         $.getJSON("/delphi_public_programs", function(data) {
-            console.log(data);
             for (var i = 0; i < data.length; ++i) {
                 for (var key in self.regionInfo) {
                     if (self.regionInfo.hasOwnProperty(key)) {
