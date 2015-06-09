@@ -7,19 +7,18 @@ var updateMap = function() {
             var filterData, lower, upper, currRegionData;
 
             // loop through all filters for current region, if fail even once then break to next region
-            for( var k in Demograf.allFilters) {
-                
+            for (var k in Demograf.allFilters) {
+
                 filterData = Demograf.allFilters[k];
                 lower = filterData.lower;
                 upper = filterData.upper;
 
-                currRegionData = numeral().unformat( ((Demograf.regionInfo[key])[k]) );
-            
-                if( (currRegionData >= lower) && (currRegionData <= upper) ) {
+                currRegionData = numeral().unformat(((Demograf.regionInfo[key])[k]));
+
+                if ((currRegionData >= lower) && (currRegionData <= upper)) {
                     Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
-                }
-                else {
-                    Demograf.map.svg.select('path#' + regionId).style('fill', '#989898', 'important');                
+                } else {
+                    Demograf.map.svg.select('path#' + regionId).style('fill', '#989898', 'important');
                     break;
                 }
             }
@@ -72,7 +71,7 @@ var open_side_menu = function(theArea) {
 
                 //Percentage Below Poverty
                 var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
-                percentage_below_poverty = numeral(percentage_below_poverty * 100).format('0.00');
+                percentage_below_poverty = numeral(percentage_below_poverty).format('0.00');
 
                 //Percentage Educated
                 var percentage_educated = (Demograf.regionInfo[key])['Percentage Bachelor Degree'];
@@ -84,15 +83,15 @@ var open_side_menu = function(theArea) {
 
                 //Percentage Unemployed
                 var percentage_unemployed = (Demograf.regionInfo[key])['Percentage Unemployed'];
-                percentage_unemployed = numeral(percentage_unemployed * 100).format('0.00');
+                percentage_unemployed = numeral(percentage_unemployed).format('0.00');
 
                 //Cash Assistance
                 var cash_assistance = ((Demograf.regionInfo[key]))['Percentage With Cash Assistance'];
-                cash_assistance = numeral(cash_assistance * 100).format('0.00');
+                cash_assistance = numeral(cash_assistance).format('0.00');
 
                 //SNAP
                 var snap = ((Demograf.regionInfo[key]))['Percentage With SNAP'];
-                snap = numeral(snap * 100).format('0.00');
+                snap = numeral(snap).format('0.00');
 
                 //Race Population
                 var asian = ((Demograf.regionInfo[key]))['Asian/Pacific Islander Population'];
@@ -101,6 +100,10 @@ var open_side_menu = function(theArea) {
                 var white = ((Demograf.regionInfo[key]))['White Population'];
                 var other = ((Demograf.regionInfo[key]))['Other Race/Ethnicity Population'];
                 var largest_race = ((Demograf.regionInfo[key]))['Largest Race'];
+
+                //Median Contract Rent
+                var median_contract_rent = ((Demograf.regionInfo[key]))['Median Contract Rent'];
+                median_contract_rent = numeral(median_contract_rent).format('$0,0.');
                 break;
             }
         }
@@ -146,7 +149,7 @@ var open_side_menu = function(theArea) {
     //Housing Cost Chart
     var housingcost_chart = c3.generate({
         bindto: '#housingcost_chart',
-        
+
         data: {
             type: 'donut',
             columns: [
@@ -156,13 +159,16 @@ var open_side_menu = function(theArea) {
             ]
         }
     });
-    
-        //Median House Vale Chart
-            ($('#median_house_value_chart').html('<h3 class="text-center">' + median_house_value + '</h3>'));
 
-        
+    //Median House Vale Chart
+    ($('#median_house_value_chart').html('<h3 class="text-center">' + median_house_value + '</h3>'));
+
+
     //Median Income
     ($('#median_income_value_chart').html('<h3 class="text-center">' + median_income + '</h3>'));
+
+    //Median Contract Rent
+    ($('#median_contract_rent_chart').html('<h3 class="text-center">' + median_contract_rent + '</h3>'));
 
     //Percentage Below Poverty
     var poverty_chart = c3.generate({
@@ -192,7 +198,7 @@ var open_side_menu = function(theArea) {
     });
 
     //Percentage Single
-var single_chart = c3.generate({
+    var single_chart = c3.generate({
         bindto: '#single_chart',
         donut: {
             title: "Marital status"
@@ -313,7 +319,7 @@ $(function() {
         onChange: function(data) {
             Demograf.allFilters['Percentage Unemployed'].lower = data.from;
             Demograf.allFilters['Percentage Unemployed'].upper = data.to;
-            updateMap();  
+            updateMap();
         }
     });
 });
@@ -599,7 +605,7 @@ var Demograf = Demograf || (function() {
                             delete data[i].Area;
                             //(self.regionInfo[key])['Housing Cost'] = (data[i]);
 
-                            for( var k in data[i] ) {
+                            for (var k in data[i]) {
                                 self.regionInfo[key][k] = data[i][k];
                             }
 
@@ -667,7 +673,7 @@ var Demograf = Demograf || (function() {
                             delete data[i].Area;
                             //(self.regionInfo[key])['Age Population'] = (data[i]);
 
-                            for( var k in data[i] ) {
+                            for (var k in data[i]) {
                                 self.regionInfo[key][k] = data[i][k];
                             }
 
@@ -688,7 +694,7 @@ var Demograf = Demograf || (function() {
                             delete data[i].Area;
                             //(self.regionInfo[key])['Gender Population'] = (data[i]);
 
-                            for( var k in data[i] ) {
+                            for (var k in data[i]) {
                                 self.regionInfo[key][k] = data[i][k];
                             }
 
@@ -709,7 +715,7 @@ var Demograf = Demograf || (function() {
                             delete data[i].Area;
                             //(self.regionInfo[key])['Race Population'] = (data[i]);
 
-                            for( var k in data[i] ) {
+                            for (var k in data[i]) {
                                 self.regionInfo[key][k] = data[i][k];
                             }
 
@@ -745,7 +751,7 @@ var Demograf = Demograf || (function() {
                             delete data[i].Area;
                             //(self.regionInfo[key])['Public Programs'] = (data[i]);
 
-                            for( var k in data[i] ) {
+                            for (var k in data[i]) {
                                 self.regionInfo[key][k] = data[i][k];
                             }
 
@@ -805,9 +811,9 @@ var Demograf = Demograf || (function() {
             }
         });
 
-        //NEED EDUCATION
-
-        //NEED OCUPATION
+        //NEED ALL EDUCATION
+        //NEED ALL MARITAL STATUS
+        //NEED ALL OCUPATION
 
     };
     /* Create Map */
@@ -845,13 +851,13 @@ var Demograf = Demograf || (function() {
     };
 
     self.allFilters = {
-        "Median Income" : {},
-        "Percentage Unemployed" : {},    
-        "Percentage With SNAP" : {},
-        "Percentage With Cash Assistance" : {},
-        "Percentage Below Poverty" : {},
-        "Median House Value" : {},
-        "Median Contract Rent" : {},
+        "Median Income": {},
+        "Percentage Unemployed": {},
+        "Percentage With SNAP": {},
+        "Percentage With Cash Assistance": {},
+        "Percentage Below Poverty": {},
+        "Median House Value": {},
+        "Median Contract Rent": {},
         "Percentage Other Language": {},
         "Percentage Bachelor Degree": {}
     };
