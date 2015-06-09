@@ -19,43 +19,13 @@ var updateMap = function() {
                     Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
                 }
                 else {
-                    Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
+                    Demograf.map.svg.select('path#' + regionId).style('fill', '#989898', 'important');                
                     break;
                 }
             }
         }
     }
 };
-/*var updateMapTwoFilters = function() {
-
-    for (var key in Demograf.regionInfo) {
-        if (Demograf.regionInfo.hasOwnProperty(key)) {
-
-            var regionId = key.replace(/ /g, "_");
-            var filterData, lower, upper, currRegionData;
-
-            // loop through all filters for current region, if fail even once then break to next region
-            for( var k in Demograf.allTwoFilters) {
-                
-                var currTwoFilter = Demograf.allTwoFilters[k];
-                for( var k2 in currTwoFilter) {
-
-                    lower = currTwoFilter[k2].lower;
-                    upper = currTwoFilter[k2].upper;
-                    currRegionData = numeral().unformat( (Demograf.regionInfo[key])[k][k2] );
-                
-                    if( (currRegionData >= lower) && (currRegionData <= upper) ) {
-                        Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
-                    }
-                    else {
-                        Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
-                        break;
-                    }
-                }
-            }
-        }
-    }
-};*/
 
 /*****************************************************************************************
  ********************************** SIDE MENU ********************************************
@@ -105,7 +75,7 @@ var open_side_menu = function(theArea) {
                 percentage_below_poverty = numeral(percentage_below_poverty * 100).format('0.00');
 
                 //Percentage Educated
-                var percentage_educated = (Demograf.regionInfo[key])['Percentage Educated'];
+                var percentage_educated = (Demograf.regionInfo[key])['Percentage Bachelor Degree'];
                 percentage_educated = numeral(percentage_educated * 100).format('0.00');
 
                 //Percentage Single
@@ -402,17 +372,27 @@ $(function() {
     $("#poverty").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 100,
-        step: 10,
+        max: 26,
+        step: 2,
         prettify_enabled: true,
         postfix: "%",
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Percentage Below Poverty'].lower = data.from;
+            Demograf.allFilters['Percentage Below Poverty'].upper = data.to;
+        },
+        onChange: function(data) {
+            Demograf.allFilters['Percentage Below Poverty'].lower = data.from;
+            Demograf.allFilters['Percentage Below Poverty'].upper = data.to;
+            updateMap();
+        }
+
     });
 });
 
-//At least a Bachelors  Degree %
+//At least a Bachelors Degree %
 $(function() {
     $("#range8").ionRangeSlider({
         type: "double",
@@ -431,14 +411,24 @@ $(function() {
 $(function() {
     $("#house_value").ionRangeSlider({
         type: "double",
-        min: 40000,
-        max: 130000,
-        step: 10000,
+        min: 100000,
+        max: 800000,
+        step: 50000,
         prettify_enabled: true,
         prefix: "$",
         grid: true,
         grid_snap: true,
-        force_edges: true
+        force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Median House Value'].lower = data.from;
+            Demograf.allFilters['Median House Value'].upper = data.to;
+        },
+        onChange: function(data) {
+            Demograf.allFilters['Median House Value'].lower = data.from;
+            Demograf.allFilters['Median House Value'].upper = data.to;
+            updateMap();
+        }
+
     });
 });
 
@@ -446,29 +436,48 @@ $(function() {
 $(function() {
     $("#rent").ionRangeSlider({
         type: "double",
-        min: 40000,
-        max: 130000,
-        step: 10000,
+        min: 600,
+        max: 2000,
+        step: 100,
         prettify_enabled: true,
         prefix: "$",
         grid: true,
         grid_snap: true,
-        force_edges: true
+        force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Median Contract Rent'].lower = data.from;
+            Demograf.allFilters['Median Contract Rent'].upper = data.to;
+        },
+        onChange: function(data) {
+            Demograf.allFilters['Median Contract Rent'].lower = data.from;
+            Demograf.allFilters['Median Contract Rent'].upper = data.to;
+            updateMap();
+        }
+
     });
 });
 
-//Degree %
+//Bach Degree %
 $(function() {
     $("#degree").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 100,
-        step: 10,
+        max: 40,
+        step: 2,
         prettify_enabled: true,
         postfix: "%",
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Percentage Bachelor Degree'].lower = data.from;
+            Demograf.allFilters['Percentage Bachelor Degree'].upper = data.to;
+        },
+        onChange: function(data) {
+            Demograf.allFilters['Percentage Bachelor Degree'].lower = data.from;
+            Demograf.allFilters['Percentage Bachelor Degree'].upper = data.to;
+            updateMap();
+        }
     });
 });
 
@@ -477,13 +486,23 @@ $(function() {
     $("#language").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 100,
-        step: 10,
+        max: 15,
+        step: 1,
         prettify_enabled: true,
         postfix: "%",
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onStart: function(data) {
+            Demograf.allFilters['Percentage Other Language'].lower = data.from;
+            Demograf.allFilters['Percentage Other Language'].upper = data.to;
+        },
+        onChange: function(data) {
+            Demograf.allFilters['Percentage Other Language'].lower = data.from;
+            Demograf.allFilters['Percentage Other Language'].upper = data.to;
+            updateMap();
+        }
+
     });
 });
 
@@ -628,7 +647,7 @@ var Demograf = Demograf || (function() {
 
                         // if current data Area matches current Region area
                         if (key == data[i].Area) {
-                            (self.regionInfo[key])['Percentage Educated'] = (data[i])['Percentage Educated'];
+                            (self.regionInfo[key])['Percentage Bachelor Degree'] = (data[i])['Percentage Bachelor Degree'];
                             break;
                         }
                     }
@@ -754,13 +773,35 @@ var Demograf = Demograf || (function() {
             }
         });
 
-        /*$.getJSON("/delphi_languages", function(data) {
-            console.log(data);
-        });*/
+        $.getJSON("/delphi_languages", function(data) {
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
 
-        /*$.getJSON("/delphi_rental_statistics", function(data) {
-            console.log(data);
-        });*/
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            (self.regionInfo[key])['Percentage Other Language'] = (data[i])['Percentage Other Language'];
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
+        $.getJSON("/delphi_rental_statistics", function(data) {
+            for (var i = 0; i < data.length; ++i) {
+                for (var key in self.regionInfo) {
+                    if (self.regionInfo.hasOwnProperty(key)) {
+
+                        // if current data Area matches current Region area
+                        if (key == data[i].Area) {
+                            (self.regionInfo[key])['Median Contract Rent'] = (data[i])['Median contract rent'];
+                            break;
+                        }
+                    }
+                }
+            }
+        });
 
         //NEED EDUCATION
 
@@ -805,16 +846,13 @@ var Demograf = Demograf || (function() {
         "Median Income" : {},
         "Percentage Unemployed" : {},    
         "Percentage With SNAP" : {},
-        "Percentage With Cash Assistance" : {}
-        
+        "Percentage With Cash Assistance" : {},
+        "Percentage Below Poverty" : {},
+        "Median House Value" : {},
+        "Median Contract Rent" : {},
+        "Percentage Other Language": {},
+        "Percentage Bachelor Degree": {}
     };
-
-    /*self.allTwoFilters = {
-        "Public Programs" : { 
-            "Percentage With SNAP" : {},
-            "Percentage With Cash Assistance": {} 
-        } 
-    };*/
 
     /** 
      * initialize 

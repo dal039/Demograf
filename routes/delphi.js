@@ -141,7 +141,7 @@ exports.getEducation = function(req, res) {
             for (var i = 0; i < result.rows.length; i += 2) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
-                    'Percentage Educated': result.rows[i + 1].Population / result.rows[i].Population
+                    'Percentage Bachelor Degree': (result.rows[i + 1].Population / result.rows[i].Population)*100
                 };
 
                 filteredResults.push(areaObj);
@@ -308,7 +308,7 @@ exports.getPoverty = function(req, res) {
             for (var i = 0; i < result.rows.length; i += 2) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
-                    'Percentage Below Poverty': result.rows[i + 1].Total / result.rows[i].Total
+                    'Percentage Below Poverty': (result.rows[i + 1].Total / result.rows[i].Total)*100
                 };
 
                 filteredResults.push(areaObj);
@@ -434,7 +434,7 @@ exports.getLanguages = function(req, res) {
             for (var i = 0; i < result.rows.length; i += 2) {
                 var areaObj = {
                     'Area': result.rows[i].Area,
-                    'Percentage Other Language': result.rows[i + 1].Population / result.rows[i].Population
+                    'Percentage Other Language': (result.rows[i + 1].Population / result.rows[i].Population)*100
                 };
 
                 filteredResults.push(areaObj);
