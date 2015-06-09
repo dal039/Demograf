@@ -22,10 +22,6 @@ var updateMap = function() {
                     Demograf.map.svg.select('path#' + regionId).style('fill', '#212121', 'important');                
                     break;
                 }
-            }
-        }
-    }
-};
 
 /*var updateMapTwoFilters = function() {
 
@@ -64,13 +60,9 @@ var updateMap = function() {
 /* Grab Data and open side menu */
 var open_side_menu = function(theArea) {
 
-    //Array to hold all median incomes
-    var all_median_incomes = [];
     //Loop through object and add data to variables
     for (var key in Demograf.regionInfo) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
-            //add to all median incomes array
-            all_median_incomes.push((Demograf.regionInfo[key])['Median House Value']);
 
             if (key == theArea) {
                 //Age Population
@@ -102,6 +94,8 @@ var open_side_menu = function(theArea) {
 
                 //Median Income
                 var median_income = (Demograf.regionInfo[key])['Median Income'];
+                median_income = numeral().unformat(median_income);
+                var median_income = numeral(median_income).format('$0,0.');
 
                 //Percentage Below Poverty
                 var percentage_below_poverty = (Demograf.regionInfo[key])['Percentage Below Poverty'];
@@ -138,7 +132,6 @@ var open_side_menu = function(theArea) {
             }
         }
     }
-    all_median_incomes.sort();
 
     //Area Name
     ($('#area_name').html('<h3>' + theArea + '</h3>'));
@@ -180,9 +173,7 @@ var open_side_menu = function(theArea) {
     //Housing Cost Chart
     var housingcost_chart = c3.generate({
         bindto: '#housingcost_chart',
-        donut: {
-            title: "Percent of Household Income on Housing"
-        },
+        
         data: {
             type: 'donut',
             columns: [
@@ -192,26 +183,13 @@ var open_side_menu = function(theArea) {
             ]
         }
     });
+    
+        //Median House Vale Chart
+            ($('#median_house_value_chart').html('<h3 class="text-center">' + median_house_value + '</h3>'));
 
-    //Median House Vale Chart
-    var median_house_value_chart = c3.generate({
-        bindto: '#median_house_value_chart',
-        data: {
-            columns: [
-                all_median_incomes
-            ],
-            type: 'bar'
-        },
-        bar: {
-            width: {
-                ratio: 0.5 // this makes bar width 50% of length between ticks
-            },
-            // or
-            //width: 100 // this makes bar width 100px
-        }
-    });
-
+        
     //Median Income
+    ($('#median_income_value_chart').html('<h3 class="text-center">' + median_income + '</h3>'));
 
     //Percentage Below Poverty
     var poverty_chart = c3.generate({
@@ -229,27 +207,29 @@ var open_side_menu = function(theArea) {
     //Percentage Educated
     var educated_chart = c3.generate({
         bindto: '#educated_chart',
+        donut: {
+            title: "Education Breakdown"
+        },
         data: {
+            type: 'donut',
             columns: [
                 ['Population 25+ with Bachelor\'s Degree', percentage_educated]
-            ],
-            type: 'gauge',
-
-        },
-        gauge: {}
+            ]
+        }
     });
 
     //Percentage Single
-    var single_chart = c3.generate({
+var single_chart = c3.generate({
         bindto: '#single_chart',
+        donut: {
+            title: "Marital status"
+        },
         data: {
+            type: 'donut',
             columns: [
                 ['Population 15+ Single', percentage_single]
-            ],
-            type: 'gauge',
-
-        },
-        gauge: {}
+            ]
+        }
     });
 
     //Percentage unemployed
@@ -880,4 +860,3 @@ $(document).ready(function() {
     console.log(Demograf.regionInfo);
 
 });
-
