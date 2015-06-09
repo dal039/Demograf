@@ -104,7 +104,7 @@ exports.getEmploymentStatus = function(req, res) {
             for (var i = 0; i < result.rows.length; i += 2) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
-                    'Percentage Unemployed': result.rows[i + 1].Population / result.rows[i].Population
+                    'Percentage Unemployed': (result.rows[i + 1].Population / result.rows[i].Population)*100
                 };
 
                 filteredResults.push(areaObj);
@@ -341,8 +341,8 @@ exports.getPublicPrograms = function(req, res) {
             for (var i = 0; i < result.rows.length; ++i ) {
                 var areaObj = {
                     'Area': checkAreaName(result.rows[i].Area),
-                    'Percentage With SNAP': (result.rows[i])['Households With SNAP'] / (result.rows[i])['Total Households'],
-                    'Percentage With Cash Assistance': (result.rows[i])['Households With Cash Assistance'] / (result.rows[i])['Total Households']
+                    'Percentage With SNAP': ((result.rows[i])['Households With SNAP'] / (result.rows[i])['Total Households'])*100,
+                    'Percentage With Cash Assistance': ((result.rows[i])['Households With Cash Assistance'] / (result.rows[i])['Total Households'])*100
                 };
 
                 filteredResults.push(areaObj);

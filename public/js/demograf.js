@@ -1,10 +1,18 @@
-var updateMap = function(filter, lower, upper) {
+//var updateModifiedFilters = function(filter1, filter2, lower, upper) {
+    //Demograf.modifiedFilters
+//};
+
+var updateMap = function(filter1, filter2, lower, upper) {
 
     for (var key in Demograf.regionInfo) {
         if (Demograf.regionInfo.hasOwnProperty(key)) {
             var regionId = key.replace(/ /g, "_");
 
-            currRegionData = numeral().unformat((Demograf.regionInfo[key])[filter]);
+            if(filter2 === null) {
+                currRegionData = numeral().unformat((Demograf.regionInfo[key])[filter1]);
+            } else {
+                currRegionData = numeral().unformat( ((Demograf.regionInfo[key])[filter1])[filter2] );
+            }
 
             if( (currRegionData >= lower) && (currRegionData <= upper)  )  {
                 Demograf.map.svg.select('path#' + regionId).style('fill', '#2196f3', 'important');
@@ -293,7 +301,8 @@ $(function() {
         grid_snap: true,
         force_edges: true,
         onChange: function(data) {
-            updateMap('Median Income', data.from, data.to);
+            //updateModifiedFilters();
+            updateMap('Median Income', null, data.from, data.to);
         }
     });
 });
@@ -303,13 +312,17 @@ $(function() {
     $("#unemployed").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 100,
-        step: 10,
+        max: 16,
+        step: 1,
         prettify_enabled: true,
         postfix: "%",
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onChange: function(data) {
+            updateMap('Percentage Unemployed', null, data.from, data.to);
+        }
+
     });
 });
 
@@ -318,13 +331,17 @@ $(function() {
     $("#snap").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 100,
-        step: 10,
+        max: 12,
+        step: 1,
         prettify_enabled: true,
         postfix: "%",
         grid: true,
         grid_snap: true,
         force_edges: true,
+        onChange: function(data) {
+            updateMap('Public Programs', 'Percentage With SNAP', data.from, data.to);
+        }
+
     });
 });
 
@@ -721,6 +738,8 @@ var Demograf = Demograf || (function() {
         });
 
     };
+
+    self.modifiedFilters = {};
 
     /** 
      * initialize 
